@@ -5,6 +5,9 @@
   "scripts": {
     "update-version": "node ./src/update-version.mjs"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "node",
     "css",
