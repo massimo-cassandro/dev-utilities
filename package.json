@@ -1,0 +1,43 @@
+{
+  "name": "@massimo-cassandro/dev-utils",
+  "version": "1.0.0",
+  "description": "My collection of dev utilities",
+  "scripts": {
+    "update-version": "node ./src/update-version.mjs"
+  },
+  "keywords": [
+    "node",
+    "css",
+    "visual",
+    "studio",
+    "code"
+  ],
+  "author": "Massimo Cassandro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massimo-cassandro/dev-utils.git#main"
+  },
+  "bugs": {
+    "url": "https://github.com/massimo-cassandro/dev-utils/issues"
+  },
+  "homepage": "https://github.com/massimo-cassandro/dev-utils/tree/main#readme",
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@massimo-cassandro/linters-config/eslintrc.js"
+    ]
+  },
+  "stylelint": {
+    "extends": "@massimo-cassandro/linters-config/stylelintrc.js"
+  },
+  "files": [
+    "src/**/*"
+  ],
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "inquirer": "^9.1.4"
+  },
+  "devDependencies": {
+    "@massimo-cassandro/linters-config": "^1.1.6"
+  }
+}
