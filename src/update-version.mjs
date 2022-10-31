@@ -3,7 +3,7 @@
 
 /**
  * Recupera e incrementa il numero di versione del package
- * se presente il flag `--twig-main-glob_vars=path/to/file/config.html.twig`,
+ * se presente il flag `--twig-vars-file=path/to/file/config.html.twig`,
  *   aggiorna anche l'elemento `vers` della variabile twig `glob_vars`
  *   contentuta in `path/to/file/config.html.twig`
  */
@@ -29,7 +29,7 @@ try {
   let twig_file = null;
 
   process.argv.forEach(function (param) {
-    if(/^--twig-main-glob_vars/.test(param)) {
+    if(/^--twig-vars-file/.test(param)) {
 
       [, twig_file] = param.split('=');
     }
