@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2022-10-31T10:00:00.000Z",
+    "vers": "1.0.0",
+    "descr": "update-version: Prima versione"
+  },
+  {
+    "date": "2022-10-31T10:12:00.000Z",
+    "vers": "1.1.0",
+    "descr": "update-version: Flags `--patch-only` e `--twig-vars-file`"
+  },
+  {
+    "date": "2022-11-19T14:19:59.295Z",
+    "vers": "1.2.0",
+    "descr": "update-version: Gestione changelog"
+  }
+]
