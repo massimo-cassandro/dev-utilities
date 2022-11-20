@@ -21,6 +21,7 @@
 import * as fs from 'fs';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import clipboard from 'clipboardy';
 
 const log = console.log;
 
@@ -126,6 +127,9 @@ try {
         ])
         .then((answer) => {
           log_item.descr= answer.descr.trim()? answer.descr.trim() : null;
+          if(log_item.descr) {
+            clipboard.writeSync(log_item.vers + ' - ' + log_item.descr);
+          }
           updateLog(log_item);
           writeFiles();
         });

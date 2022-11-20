@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utils",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "My collection of dev utilities",
   "scripts": {
     "update-patch-version": "node ./src/update-version.mjs --patch-only --no-log",
@@ -39,6 +39,7 @@
   ],
   "dependencies": {
     "chalk": "^5.1.2",
+    "clipboardy": "^3.0.0",
     "inquirer": "^9.1.4"
   },
   "devDependencies": {
