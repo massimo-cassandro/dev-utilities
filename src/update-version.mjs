@@ -84,7 +84,7 @@ try {
       item.date + ' | ' +
       (item.descr !== null? item.descr : '');
 
-    fs.appendFileSync(log_file, '\n' + row);
+    fs.appendFileSync(log_file, row + '\n');
   };
 
   const updateVers = (mode) => {
