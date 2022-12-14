@@ -14,7 +14,7 @@
  * Ogni aggiornamento aggiunge un elemento al file `changelog.json` posizionato
  * sulla root del progetto
  * Ogni elemento contiene la versione, la data e opzionalmente um testo descrittivo
- * Il prompt per il testo descrittivo non viene richiesto in presenza dei flag `--no-log`
+ * Il prompt per il testo descrittivo non viene richiesto in presenza dei flag `--no-descr-prompt`
  */
 
 // shell: npm info YOUR_PACKAGE version
@@ -35,7 +35,7 @@ const log = console.log;
 try {
 
   const package_json_file = './package.json',
-    log_file = './changelog.json';
+    log_file = './changelog.txt'; // './changelog.json';
 
   let file_content = fs.readFileSync(package_json_file, 'utf8');
   const package_json = JSON.parse(file_content),
@@ -46,7 +46,7 @@ try {
   // twig
   let twig_file = null,
     patchOnly = false,
-    log_prompt = true;
+    descr_prompt = true;
 
   process.argv.forEach(function (param) {
     if(/^--twig-vars-file/.test(param)) {
@@ -57,21 +57,34 @@ try {
       patchOnly = true;
     }
 
-    if(/^--no-log$/.test(param)) {
-      log_prompt = false;
+    if(/^--no-descr-prompt$/.test(param)) {
+      descr_prompt = false;
     }
 
   });
 
   const updateLog = (item) => {
-    let changelog;
+    /* let changelog;
     if(fs.existsSync(log_file)) {
       changelog = JSON.parse(fs.readFileSync(log_file, 'utf8'));
+      changelog.sort((a,b) => a.date < b.date);
+
     } else {
       changelog = [];
     }
-    changelog.push(item);
-    fs.writeFileSync(log_file, JSON.stringify(changelog, null, '  '));
+
+    changelog.unshift(item);
+
+    fs.writeFileSync(log_file, JSON.stringify(changelog, ['vers', 'date', 'descr'], '')
+      .replace(/\[/, '[\n')
+      .replace(/},/g, '},\n')
+    ); */
+
+    let row = (' '.repeat(10) + item.vers).slice(-8) + ' | ' +
+      item.date + ' | ' +
+      (item.descr !== null? item.descr : '');
+
+    fs.appendFileSync(log_file, '\n' + row);
   };
 
   const updateVers = (mode) => {
@@ -108,12 +121,12 @@ try {
     };
 
     const log_item = {
-      date: new Date().toISOString(),
       vers: new_version,
+      date: new Date().toISOString(),
       descr: null
     };
 
-    if(log_prompt) {
+    if(descr_prompt) {
       inquirer
         .prompt([
           {

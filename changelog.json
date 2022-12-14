@@ -1,22 +1,8 @@
 [
-  {
-    "date": "2022-10-31T10:00:00.000Z",
-    "vers": "1.0.0",
-    "descr": "update-version: Prima versione"
-  },
-  {
-    "date": "2022-10-31T10:12:00.000Z",
-    "vers": "1.1.0",
-    "descr": "update-version: Flags `--patch-only` e `--twig-vars-file`"
-  },
-  {
-    "date": "2022-11-19T14:19:59.295Z",
-    "vers": "1.2.0",
-    "descr": "update-version: Gestione changelog"
-  },
-  {
-    "date": "2022-11-20T21:23:36.982Z",
-    "vers": "1.3.0",
-    "descr": "update-version: copy descr to clipboard"
-  }
+{"vers":"1.3.2","date":"2022-11-29T21:40:48.927Z","descr":null},
+{"vers":"1.3.0","date":"2022-11-20T21:23:36.982Z","descr":"update-version: copy descr to clipboard"},
+{"vers":"1.3.1","date":"2022-11-29T18:56:19.986Z","descr":null},
+{"vers":"1.2.0","date":"2022-11-19T14:19:59.295Z","descr":"update-version: Gestione changelog"},
+{"vers":"1.1.0","date":"2022-10-31T10:12:00.000Z","descr":"update-version: Flags `--patch-only` e `--twig-vars-file`"},
+{"vers":"1.0.0","date":"2022-10-31T10:00:00.000Z","descr":"update-version: Prima versione"}
 ]
