@@ -47,6 +47,7 @@ try {
   let twig_file = null,
     patchOnly = false,
     descr_prompt = true;
+    // default_descr = null;
 
   process.argv.forEach(function (param) {
     if(/^--twig-vars-file/.test(param)) {
@@ -60,6 +61,10 @@ try {
     if(/^--no-descr-prompt$/.test(param)) {
       descr_prompt = false;
     }
+
+    // if(/^--default-descr=(.*?)$/.test(param)) {
+    //   [,default_descr] = param.split['='];
+    // }
 
   });
 
@@ -80,7 +85,7 @@ try {
       .replace(/},/g, '},\n')
     ); */
 
-    let row = (' '.repeat(10) + item.vers).slice(-8) + ' | ' +
+    let row = (' '.repeat(10) + item.vers).slice(-10) + ' | ' +
       item.date + ' | ' +
       (item.descr !== null? item.descr : '');
 

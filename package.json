@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utils",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "My collection of dev utilities",
   "scripts": {
     "update-patch-version": "node ./src/update-version.mjs --patch-only --no-descr-prompt",
