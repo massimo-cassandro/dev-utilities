@@ -8,6 +8,9 @@
  *   aggiorna anche l'elemento `vers` della variabile twig `glob_vars`
  *   contentuta in `path/to/file/config.html.twig`
  *
+ * se presente il flag `--html-files=path/to/html_file1.html,path/to/html_file2.html,...`,
+ *   aggiorna la stringa `(?|&)(_|v)=1.2.3(-\d+)` associata ai tag che richoamano file js o css
+ *
  * la presenza del flag `--patch-only` fa in modo che non sia impostato direttamente
  * l'aggiornamento della patch versione senza necessità di ulteriori interazioni
  *
@@ -45,6 +48,7 @@ try {
 
   // twig
   let twig_file = null,
+    html_files = null,
     patchOnly = false,
     descr_prompt = true;
     // default_descr = null;
@@ -52,6 +56,10 @@ try {
   process.argv.forEach(function (param) {
     if(/^--twig-vars-file/.test(param)) {
       [, twig_file] = param.split('=');
+    }
+
+    if(/^--html-files/.test(param)) {
+      [, html_files] = param.split('=');
     }
 
     if(/^--patch-only$/.test(param)) {
@@ -115,6 +123,15 @@ try {
         file_content = file_content.replace(/vers: '\d+\.\d+\.\d+'/, `vers: '${new_version}'`);
         fs.writeFileSync(twig_file, file_content);
         log(chalk.dim(`\nAggiornamento file twig: ${twig_file}`));
+      }
+
+      if(html_files) {
+        html_files.split(',').forEach(file => {
+          file_content = fs.readFileSync(file, 'utf8');
+          file_content = file_content.replace(/\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-\d+)?/g, `.$1$2$3=${new_version}`);
+          fs.writeFileSync(file, file_content);
+          log(chalk.dim(`\nAggiornamento file html: ${file}`));
+        });
       }
 
       const outputString = `│  👍 Versione aggiornata: ${version} → ${new_version}  │`,
