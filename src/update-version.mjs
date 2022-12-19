@@ -50,10 +50,11 @@ try {
   let twig_file = null,
     html_files = null,
     patchOnly = false,
-    descr_prompt = true;
-    // default_descr = null;
+    descr_prompt = true,
+    default_descr = null;
 
   process.argv.forEach(function (param) {
+
     if(/^--twig-vars-file/.test(param)) {
       [, twig_file] = param.split('=');
     }
@@ -70,11 +71,13 @@ try {
       descr_prompt = false;
     }
 
-    // if(/^--default-descr=(.*?)$/.test(param)) {
-    //   [,default_descr] = param.split['='];
-    // }
+    if(/^--default-descr=(.*?)$/.test(param)) {
+      [,default_descr] = param.split('=');
+    }
 
   });
+
+  console.log(default_descr);
 
   const updateLog = (item) => {
     /* let changelog;
@@ -102,7 +105,12 @@ try {
 
   const updateVers = (mode) => {
 
-    if(mode === 'minor') {
+    if(mode === 'major') {
+      version_array[0]++;
+      version_array[1] = 0;
+      version_array[2] = 0;
+
+    } else if(mode === 'minor') {
       version_array[1]++;
       version_array[2] = 0;
 
@@ -128,7 +136,7 @@ try {
       if(html_files) {
         html_files.split(',').forEach(file => {
           file_content = fs.readFileSync(file, 'utf8');
-          file_content = file_content.replace(/\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-\d+)?/g, `.$1$2$3=${new_version}`);
+          file_content = file_content.replace(/\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-(rc\.)?\d+)?/g, `.$1$2$3=${new_version}`);
           fs.writeFileSync(file, file_content);
           log(chalk.dim(`\nAggiornamento file html: ${file}`));
         });
@@ -156,7 +164,7 @@ try {
             name: 'descr',
             message: 'Descrizione: ',
             default() {
-              return null;
+              return default_descr;
             }
           }
         ])
@@ -200,6 +208,10 @@ try {
               value: 'minor',
             },
             {
+              name: 'Aggiorna la major version',
+              value: 'major',
+            },
+            {
               name: 'Annulla',
               value: 'none',
             }
@@ -217,6 +229,6 @@ try {
   } // end if patchOnly
 
 } catch (err) {
-  console.error(chalk.red(`${err}`));
+  console.error(chalk.bgRed(` ${err} `));
 }
 
