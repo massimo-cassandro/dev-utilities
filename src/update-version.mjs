@@ -120,11 +120,11 @@ try {
 
     let new_version = version_array.join('.');
 
-    package_json.version = new_version;
-    fs.writeFileSync(package_json_file, JSON.stringify(package_json, null, '  '));
-
-
     const writeFiles = () => {
+
+      package_json.version = new_version;
+      fs.writeFileSync(package_json_file, JSON.stringify(package_json, null, '  '));
+
       if(twig_file) {
 
         file_content = fs.readFileSync(twig_file, 'utf8');
