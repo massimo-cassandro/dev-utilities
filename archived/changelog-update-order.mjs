@@ -15,7 +15,7 @@ let file_content = fs.readFileSync(log_file, 'utf8');
 const new_log = file_content.trimEnd().split('\n')
   .map(row => {
     const r = row.split('|');
-    return `${r[1]}|${r[0]}|${r[2]}`;
+    return `${r[1].trimStart()}|${r[0]}|${r[2]}`;
   }).join('\n') + '\n';
 
 console.log(new_log);
