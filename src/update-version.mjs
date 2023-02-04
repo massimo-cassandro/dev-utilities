@@ -6,18 +6,20 @@
  *
  * se presente il flag `--twig-vars-file=path/to/file/config.html.twig`,
  *   aggiorna anche l'elemento `vers` della variabile twig `glob_vars`
- *   contentuta in `path/to/file/config.html.twig`
+ *   contenuta in `path/to/file/config.html.twig`
  *
  * se presente il flag `--html-files=path/to/html_file1.html,path/to/html_file2.html,...`,
- *   aggiorna la stringa `(?|&)(_|v)=1.2.3(-\d+)` associata ai tag che richoamano file js o css
+ *   aggiorna la stringa `(?|&)(_|v)=1.2.3(-\d+)` associata ai tag che richiamano file js o css
  *
- * la presenza del flag `--patch-only` fa in modo che non sia impostato direttamente
- * l'aggiornamento della patch versione senza necessità di ulteriori interazioni
+ * la presenza del flag `--patch-only` fa in modo che sia impostato direttamente
+ * l'aggiornamento della patch version saltando l'opzione di scelta del tipo di aggiornamento
  *
  * Ogni aggiornamento aggiunge un elemento al file `changelog.json` posizionato
  * sulla root del progetto
  * Ogni elemento contiene la versione, la data e opzionalmente um testo descrittivo
  * Il prompt per il testo descrittivo non viene richiesto in presenza dei flag `--no-descr-prompt`
+ *
+ * `--default-descr=text`: testo descrittivo di default
  */
 
 // shell: npm info YOUR_PACKAGE version
@@ -96,8 +98,8 @@ try {
       .replace(/},/g, '},\n')
     ); */
 
-    let row = (' '.repeat(10) + item.vers).slice(-10) + ' | ' +
-      item.date + ' | ' +
+    let row = item.date + ' | ' +
+      (' '.repeat(10) + item.vers).slice(-10) + ' | ' +
       (item.descr !== null? item.descr : '');
 
     fs.appendFileSync(log_file, row + '\n');
