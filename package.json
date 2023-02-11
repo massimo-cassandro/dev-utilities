@@ -1,19 +1,21 @@
 {
   "name": "@massimo-cassandro/dev-utils",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "My collection of dev utilities",
+  "exports": {
+    "./update-version.*": "./scripts/update-version.mjs",
+    "./vscode-css-properties-list.*": "./scripts/vscode-css-properties-list.mjs"
+  },
+  "type": "module",
   "scripts": {
-    "update-version": "node ./src/update-version.mjs"
+    "update-version": "node ./scripts/update-version.mjs"
   },
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
     "node",
-    "css",
-    "visual",
-    "studio",
-    "code"
+    "dev tools"
   ],
   "author": "Massimo Cassandro",
   "license": "MIT",
