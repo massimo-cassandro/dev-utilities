@@ -1,14 +1,14 @@
 {
   "name": "@massimo-cassandro/dev-utils",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "My collection of dev utilities",
   "exports": {
-    "./update-version.*": "./scripts/update-version.mjs",
-    "./vscode-css-properties-list.*": "./scripts/vscode-css-properties-list.mjs"
+    "update-version.*": "./scripts/update-version/index.mjs",
+    "vscode-css-properties-list.*": "./scripts/vscode-css-properties-list/index.mjs"
   },
   "type": "module",
   "scripts": {
-    "update-version": "node ./scripts/update-version.mjs"
+    "update-version": "node ./scripts/update-version/index.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -36,7 +36,7 @@
     "extends": "@massimo-cassandro/linters-config/stylelintrc.js"
   },
   "files": [
-    "src/**/*"
+    "scripts/**/*"
   ],
   "dependencies": {
     "chalk": "^5.1.2",
