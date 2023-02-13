@@ -66,7 +66,6 @@ try {
 
   const updateVers = (mode) => {
 
-    console.log(cfg);
 
     if(mode === 'major') {
       version_array[0]++;
@@ -203,7 +202,6 @@ try {
       // parametri cli con precedenza rispetto a quelli del file cfg
       if(process.argv.findIndex(el => el === '--patch-only') !== -1) {
         cfg.patchOnly = true;
-        console.log('aaa');
       }
       if(process.argv.findIndex(el => el === '--skip-descr-prompt') !== -1) {
         cfg.skipDescrPrompt = true;

@@ -9,7 +9,6 @@ export default async function (configFile, property) {
 
   configFile = path.resolve('./', configFile || './dev-utils.config.js');
   // configFile = configFile || './dev-utils.config.js';
-  console.log(configFile);
   try {
 
     if(!fs.existsSync(configFile)) {
