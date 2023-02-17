@@ -153,8 +153,13 @@ Esempio di implementazione:
 
 ## TODO
 
+* riorganizzare gli script
+  * https://stackoverflow.com/questions/30782693/run-function-in-script-from-command-line-node-js
+  * https://blog.deepgram.com/npx-script/
+
 ### Update Version
 * opzione per non aggiornare html e twig ma solo package.json
+* https://github.com/natemoo-re/clack
 
 ### custom properties list
 * https://github.com/microsoft/node-jsonc-parser

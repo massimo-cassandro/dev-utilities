@@ -12,18 +12,18 @@ import { params } from './src/params.mjs';
 import { updateLog } from './src/updateLog.mjs';
 import { updateFiles } from './src/updateFiles.mjs';
 import { updateVersion } from './src/updateVersion.mjs';
-import { chooser } from './src/chooser.mjs';
+import { chooser } from './src/chooser-inquirer.mjs';
 
 
 // https://github.com/chalk/chalk
 // https://github.com/SBoudrias/Inquirer.js
 
-const log = console.log,
+const log = console.log;
 
-  // se true utilizza come versione di partenza il valore della variabile `debug_start_release`
-  // e non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
-  debug = true,
-  debug_start_release = '1.0.0-Beta.2';
+// se true utilizza come versione di partenza il valore della variabile `debug_start_release`
+// e non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
+const debug = false,
+  debug_start_release = '1.0.0';
 
 
 try {
@@ -48,7 +48,7 @@ try {
       temp[1].split('.').map((i) => (isNaN(i) ? i : +i))
     );
 
-    params.preRelease = params.versionArray[3][0];
+    params.preRelease = params.versionArray[3];
 
   } else {
     params.versionArray = params.oldVersion.split('.').map(i => +i);
@@ -156,67 +156,10 @@ try {
       } else {
 
         (async () => {
-          const result = await chooser();
-          console.log(result);
+          const choice = await chooser();
+          // console.log(`\n******\n${choice}\n**********\n`);
+          runUpdate(choice);
         })();
-
-        /* inquirer
-          .prompt([
-            {
-              type: 'list',
-              default: 0,
-              name: 'mode',
-              message: 'Aggiorna:'
-              ,
-              choices: [
-                {
-                  name: 'Aggiorna la patch version',
-                  value: 'patch',
-                },
-                {
-                  name: 'Aggiorna la minor version',
-                  value: 'minor',
-                },
-                {
-                  name: 'Aggiorna la major version',
-                  value: 'major',
-                },
-                {
-                  name: 'Annulla',
-                  value: 'none',
-                }
-              ]
-            }
-          ])
-          .then((answer) => {
-
-            if(answer.mode !== 'none') {
-
-              if(!params.cfg.skipDescrPrompt) {
-                inquirer
-                  .prompt([
-                    {
-                      type: 'input',
-                      name: 'descr',
-                      message: 'Descrizione: ',
-                      default() {
-                        return params.cfg.defaultDescr;
-                      }
-                    }
-                  ])
-                  .then((answer2) => {
-                    params.log_item.descr= answer2.descr.trim()? answer2.descr.trim() : null;
-                    runUpdate(answer.mode);
-                  });
-
-              } else {
-                runUpdate(answer.mode);
-              }
-
-            } else {
-              console.log(chalk.blue('Operazione annullata'));
-            }
-          }); */
 
       } // end else if patchOnly
 

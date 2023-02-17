@@ -15,3 +15,4 @@
 2023-02-11T20:57:12.008Z |      1.8.1 | Fix
 2023-02-13T18:06:00.821Z |      1.8.2 | fix
 2023-02-13T18:06:00.821Z |      1.8.3 | Package & repository renaming to dev-utilities
+2023-02-17T16:10:49.609Z |      1.9.0 | Gestione tag di pre-release
