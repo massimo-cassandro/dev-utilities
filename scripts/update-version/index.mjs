@@ -3,150 +3,90 @@
 
 // shell: npm info YOUR_PACKAGE version
 import * as fs from 'fs';
-import inquirer from 'inquirer';
+// import inquirer from 'inquirer';
 import chalk from 'chalk';
 import clipboard from 'clipboardy';
-import getConfig from './src/getConfig.mjs';
+
+import getConfig from '../shared/getConfig.mjs';
+import { params } from './src/params.mjs';
+import { updateLog } from './src/updateLog.mjs';
+import { updateFiles } from './src/updateFiles.mjs';
+import { updateVersion } from './src/updateVersion.mjs';
+import { chooser } from './src/chooser.mjs';
 
 
 // https://github.com/chalk/chalk
 // https://github.com/SBoudrias/Inquirer.js
 
 const log = console.log,
-  package_json_file = './package.json',
-  log_file = './changelog.txt',
-  cfg_prop = 'updateVersion', // chiave proprietà nel file di configurazione
 
-  // defaults configurazione
-  cfgDefaults = {
-    twigVarsFile     : null,
-    htmlFiles        : null,
-    skipDescrPrompt  : false,
-    patchOnly        : false,
-    defaultDescr     : null
-  };
+  // se true utilizza come versione di partenza il valore della variabile `debug_start_release`
+  // e non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
+  debug = true,
+  debug_start_release = '1.0.0-Beta.2';
 
 
 try {
 
-  let file_content = fs.readFileSync(package_json_file, 'utf8');
-  const package_json = JSON.parse(file_content),
-    version = package_json.version;
+  // lettura versione e inizializzazione variabili
+  params.preRelease = false;
 
-  let version_array = version.split('.').map(i => +i),
-    cfg = {};
+  if(debug) {
+    params.oldVersion = debug_start_release.toLowerCase();
+
+  } else {
+    let file_content = fs.readFileSync(params.packageJsonFile, 'utf8');
+    params.packageJsonContent = JSON.parse(file_content);
+    params.oldVersion = params.packageJsonContent.version.toLowerCase();
+  }
+
+  if(params.preRealeaseTags.some(tag => params.oldVersion.indexOf(`-${tag}.`) !== -1 )) {
+
+    const temp = params.oldVersion.split('-');
+    params.versionArray = temp[0].split('.').map((i) => +i);
+    params.versionArray = params.versionArray.concat(
+      temp[1].split('.').map((i) => (isNaN(i) ? i : +i))
+    );
+
+    params.preRelease = params.versionArray[3][0];
+
+  } else {
+    params.versionArray = params.oldVersion.split('.').map(i => +i);
+  }
+
+  if(params.preRelease === false && params.versionArray.length > 3) {
+    throw 'Pre-release tag non mappato';
+  }
 
   // ********************************************
 
-
-  const updateLog = (item) => {
-    /* let changelog;
-    if(fs.existsSync(log_file)) {
-      changelog = JSON.parse(fs.readFileSync(log_file, 'utf8'));
-      changelog.sort((a,b) => a.date < b.date);
-
-    } else {
-      changelog = [];
-    }
-
-    changelog.unshift(item);
-
-    fs.writeFileSync(log_file, JSON.stringify(changelog, ['vers', 'date', 'descr'], '')
-      .replace(/\[/, '[\n')
-      .replace(/},/g, '},\n')
-    ); */
-
-    let row = item.date + ' | ' +
-      (' '.repeat(10) + item.vers).slice(-10) + ' | ' +
-      (item.descr !== null? item.descr : '');
-
-    fs.appendFileSync(log_file, row + '\n');
+  params.log_item = {
+    vers: null,
+    date: new Date().toISOString(),
+    descr: null
   };
 
+  const runUpdate = (mode) => {
 
-  const updateVers = (mode) => {
+    updateVersion(mode);
 
+    params.log_item.vers =  params.newVersion;
 
-    if(mode === 'major') {
-      version_array[0]++;
-      version_array[1] = 0;
-      version_array[2] = 0;
-
-    } else if(mode === 'minor') {
-      version_array[1]++;
-      version_array[2] = 0;
-
-    } else if( mode === 'patch') {
-      version_array[2]++;
+    if(params.log_item.descr) {
+      clipboard.writeSync(params.log_item.vers + ' - ' + params.log_item.descr);
     }
 
-    let new_version = version_array.join('.');
+    if(debug) {
+      console.log(params);
 
-    const writeFiles = () => {
-
-      package_json.version = new_version;
-      fs.writeFileSync(package_json_file, JSON.stringify(package_json, null, '  '));
-
-      if(cfg.twigVarsFile) {
-
-        file_content = fs.readFileSync(cfg.twigVarsFile, 'utf8');
-        file_content = file_content.replace(/vers: '\d+\.\d+\.\d+'/, `vers: '${new_version}'`);
-        fs.writeFileSync(cfg.twigVarsFile, file_content);
-        log(chalk.dim(`\nAggiornamento file twig: ${cfg.twigVarsFile}`));
-      }
-
-      if(cfg.htmlFiles) {
-        cfg.htmlFiles.forEach(file => {
-          file_content = fs.readFileSync(file, 'utf8');
-          file_content = file_content.replace(/\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-(rc\.)?\d+)?/g, `.$1$2$3=${new_version}`);
-          fs.writeFileSync(file, file_content);
-          log(chalk.dim(`\nAggiornamento file html: ${file}`));
-        });
-      }
-
-      const outputString = `│  👍 Versione aggiornata: ${version} → ${new_version}  │`,
-        frameLine = '─'.repeat(outputString.length - 2);
-
-      log(chalk.yellow('\n┌' + frameLine + '┐'));
-      log(chalk.yellow(outputString));
-      log(chalk.yellow('└' + frameLine + '┘\n'));
-    };
-
-    const log_item = {
-      vers: new_version,
-      date: new Date().toISOString(),
-      descr: null
-    };
-
-    if(!cfg.skipDescrPrompt) {
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'descr',
-            message: 'Descrizione: ',
-            default() {
-              return cfg.defaultDescr;
-            }
-          }
-        ])
-        .then((answer) => {
-          log_item.descr= answer.descr.trim()? answer.descr.trim() : null;
-          if(log_item.descr) {
-            clipboard.writeSync(log_item.vers + ' - ' + log_item.descr);
-          }
-          updateLog(log_item);
-          writeFiles();
-        });
     } else {
-      updateLog(log_item);
-      writeFiles();
+      updateFiles();
+      updateLog();
     }
 
-  }; // end updateVers
+  }; // end runUpdate
 
 
-  // ********************
   // ********************
 
   // =>> lettura configurazione e avvio
@@ -158,7 +98,7 @@ try {
     if(cfg_param_index !== -1) {
       let [, cfgPath] = process.argv[cfg_param_index].split('=');
 
-      getConfig(cfgPath, cfg_prop)
+      getConfig(cfgPath, params.configProperty)
         .then(parsedCfg => {
           if(parsedCfg === false) {
             reject('Errore nella lettura del file di configurazione');
@@ -197,29 +137,37 @@ try {
   })
     .then( parsedCfg => {
 
-      cfg = {...cfgDefaults, ...(parsedCfg?? {})};
+      params.cfg = {...params.cfgDefaults, ...(parsedCfg?? {})};
 
       // parametri cli con precedenza rispetto a quelli del file cfg
       if(process.argv.findIndex(el => el === '--patch-only') !== -1) {
-        cfg.patchOnly = true;
+        params.cfg.patchOnly = true;
+        console.log('aaa');
       }
       if(process.argv.findIndex(el => el === '--skip-descr-prompt') !== -1) {
-        cfg.skipDescrPrompt = true;
+        params.cfg.skipDescrPrompt = true;
       }
 
-      log(chalk.dim(`\nVersione package.json attuale: ${version}\n`));
+      log(chalk.dim(`\nVersione package.json attuale: ${params.oldVersion}\n`));
 
-      if(cfg.patchOnly) {
-        updateVers('patch');
+      if(params.cfg.patchOnly) {
+        runUpdate('patch');
 
       } else {
-        inquirer
+
+        (async () => {
+          const result = await chooser();
+          console.log(result);
+        })();
+
+        /* inquirer
           .prompt([
             {
               type: 'list',
               default: 0,
               name: 'mode',
-              message: 'Aggiorna:',
+              message: 'Aggiorna:'
+              ,
               choices: [
                 {
                   name: 'Aggiorna la patch version',
@@ -241,12 +189,34 @@ try {
             }
           ])
           .then((answer) => {
+
             if(answer.mode !== 'none') {
-              updateVers(answer.mode);
+
+              if(!params.cfg.skipDescrPrompt) {
+                inquirer
+                  .prompt([
+                    {
+                      type: 'input',
+                      name: 'descr',
+                      message: 'Descrizione: ',
+                      default() {
+                        return params.cfg.defaultDescr;
+                      }
+                    }
+                  ])
+                  .then((answer2) => {
+                    params.log_item.descr= answer2.descr.trim()? answer2.descr.trim() : null;
+                    runUpdate(answer.mode);
+                  });
+
+              } else {
+                runUpdate(answer.mode);
+              }
+
             } else {
               console.log(chalk.blue('Operazione annullata'));
             }
-          });
+          }); */
 
       } // end else if patchOnly
 

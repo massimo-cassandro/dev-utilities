@@ -17,10 +17,10 @@ Se un tag pre-release viene rilevato nella versione corrente, si può scegliere,
 Utilizzo:
 
 ```bash
-node ./node_modules/@massimo-cassandro/dev-utils/scripts/update-version.mjs --config=path/to/config.js
+node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version/index.mjs --config=path/to/config.js
 ```
 
-In cui  `--config=<path>` indica il percorso al file `.js` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utils.config.js`.
+In cui  `--config=<path>` indica il percorso al file `.js` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.js`.
 
 La proprietà `updateVersion` può contenere:
 
@@ -68,7 +68,7 @@ Tutti parametri sono opzionali
 Opzionalmente, e per compatibilità con le versioni precedenti, alcuni parametri possono essere definiti direttamente via CLI:
 
 ```bash
-node ./node_modules/@massimo-cassandro/dev-utils/scripts/update-version.mjs \ 
+node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version.mjs \ 
   --html-files=path/to/html_file1.html,path/to/html_file2.html,... \
   --twig-vars-file=path/to/file/config.html.twig \
   --default-descr=text \
@@ -121,7 +121,7 @@ Package json scripts item
 
 ## File di configurazione
 
-Il file di configurazione di `dev-utils` permette la definizione dei parametri per tutti script presenti. Nessun parametro è obbligatorio, quelli presenti sono i valori di default:
+Il file di configurazione di `dev-utilities` permette la definizione dei parametri per tutti script presenti. Nessun parametro è obbligatorio, quelli presenti sono i valori di default:
 
 ```javascript
 const config = {
@@ -145,7 +145,7 @@ Esempio di implementazione:
 ```json
 {
   "scripts": {
-     "update-version": "node ./node_modules/@massimo-cassandro/dev-utils/scripts/update-version/index.mjs --config=./dev-utils.config.js"
+     "update-version": "node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version/index.mjs --config=./dev-utilities.config.js"
   }
 }
 

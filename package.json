@@ -1,6 +1,6 @@
 {
-  "name": "@massimo-cassandro/dev-utils",
-  "version": "1.8.2",
+  "name": "@massimo-cassandro/dev-utilities",
+  "version": "1.8.3",
   "description": "My collection of dev utilities",
   "exports": {
     "update-version.*": "./scripts/update-version/index.mjs",
@@ -21,12 +21,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/massimo-cassandro/dev-utils.git#main"
+    "url": "git+https://github.com/massimo-cassandro/dev-utilities.git#main"
   },
   "bugs": {
-    "url": "https://github.com/massimo-cassandro/dev-utils/issues"
+    "url": "https://github.com/massimo-cassandro/dev-utilities/issues"
   },
-  "homepage": "https://github.com/massimo-cassandro/dev-utils/tree/main#readme",
+  "homepage": "https://github.com/massimo-cassandro/dev-utilities/tree/main#readme",
   "eslintConfig": {
     "extends": [
       "./node_modules/@massimo-cassandro/linters-config/eslintrc.js"
