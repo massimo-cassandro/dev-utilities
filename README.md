@@ -17,7 +17,7 @@ Se un tag pre-release viene rilevato nella versione corrente, si può scegliere,
 Utilizzo:
 
 ```bash
-node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version/index.mjs --config=path/to/config.js
+npx update-version --config=./dev-utilities.config.js
 ```
 
 In cui  `--config=<path>` indica il percorso al file `.js` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.js`.
@@ -126,7 +126,7 @@ Il file di configurazione di `dev-utilities` permette la definizione dei paramet
 ```javascript
 const config = {
   updateVersion: { 
-    wigVarsFile     : null,
+    wigVarsFile      : null,
     htmlFiles        : null,
     skipDescrPrompt  : false,
     patchOnly        : false,
@@ -145,17 +145,13 @@ Esempio di implementazione:
 ```json
 {
   "scripts": {
-     "update-version": "node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version/index.mjs --config=./dev-utilities.config.js"
+     "update-version": "npx update-version --config=./dev-utilities.config.js"
   }
 }
 
 ```
 
 ## TODO
-
-* riorganizzare gli script
-  * https://stackoverflow.com/questions/30782693/run-function-in-script-from-command-line-node-js
-  * https://blog.deepgram.com/npx-script/
 
 ### Update Version
 * opzione per non aggiornare html e twig ma solo package.json

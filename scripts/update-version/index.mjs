@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-env node */
 /* eslint-disable no-console */
 
@@ -36,6 +38,8 @@ try {
     params.oldVersion = debug_start_release.toLowerCase();
 
   } else {
+
+
     let file_content = fs.readFileSync(params.packageJsonFile, 'utf8');
     params.packageJsonContent = JSON.parse(file_content);
     params.oldVersion = params.packageJsonContent.version.toLowerCase();

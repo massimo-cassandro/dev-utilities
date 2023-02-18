@@ -1,14 +1,13 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "My collection of dev utilities",
-  "exports": {
-    "update-version.*": "./scripts/update-version/index.mjs",
-    "vscode-css-properties-list.*": "./scripts/vscode-css-properties-list/index.mjs"
+  "bin": {
+    "update-version": "./scripts/update-version/index.mjs"
   },
   "type": "module",
   "scripts": {
-    "update-version": "node ./scripts/update-version/index.mjs"
+    "update-version": "npx update-version"
   },
   "publishConfig": {
     "access": "public"
