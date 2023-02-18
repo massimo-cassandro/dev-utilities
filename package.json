@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "My collection of dev utilities",
   "exports": {
     "update-version.*": "./scripts/update-version/index.mjs",

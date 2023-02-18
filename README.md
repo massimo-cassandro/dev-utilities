@@ -163,3 +163,6 @@ Esempio di implementazione:
 
 ### custom properties list
 * https://github.com/microsoft/node-jsonc-parser
+
+### setup init
+* inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json

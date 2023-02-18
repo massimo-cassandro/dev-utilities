@@ -1,18 +1,19 @@
-2022-10-31T10:00:00.000Z |      1.0.0 | update-version: Prima versione
+2022-10-31T10:00:00.000Z |      1.0.0 | update-version: First release
 2022-10-31T10:12:00.000Z |      1.1.0 | update-version: Flags `--patch-only` e `--twig-vars-file`
-2022-11-19T14:19:59.295Z |      1.2.0 | update-version: Gestione changelog
+2022-11-19T14:19:59.295Z |      1.2.0 | update-version: changelog management (as json)
 2022-11-20T21:23:36.982Z |      1.3.0 | update-version: copy descr to clipboard
-2022-11-29T18:56:19.986Z |      1.3.1 |
-2022-11-29T21:40:48.927Z |      1.3.2 |
-2022-12-14T15:52:40.504Z |      1.4.0 | update-version: txt changelog file
-2022-12-14T16:12:54.734Z |      1.4.1 |
-2022-12-15T09:11:11.172Z |      1.4.2 |
-2022-12-18T16:40:14.687Z |      1.5.0 | HTML files version update
-2022-12-19T11:43:43.026Z |      1.6.0 | Default description option
-2023-01-20T09:16:15.230Z |      1.6.1 |
-2023-02-04T21:09:26.071Z |      1.7.0 | Log items sequence changed
-2023-02-11T20:57:12.008Z |      1.8.0 | Implementazione file di configurazione
-2023-02-11T20:57:12.008Z |      1.8.1 | Fix
-2023-02-13T18:06:00.821Z |      1.8.2 | fix
-2023-02-13T18:06:00.821Z |      1.8.3 | Package & repository renaming to dev-utilities
-2023-02-17T16:10:49.609Z |      1.9.0 | Gestione tag di pre-release
+2022-11-29T18:56:19.986Z |      1.3.1 | update-version
+2022-11-29T21:40:48.927Z |      1.3.2 | update-version
+2022-12-14T15:52:40.504Z |      1.4.0 | update-version: changelog file swithc to txt file
+2022-12-14T16:12:54.734Z |      1.4.1 | update-version
+2022-12-15T09:11:11.172Z |      1.4.2 | update-version
+2022-12-18T16:40:14.687Z |      1.5.0 | update-version: HTML files version update
+2022-12-19T11:43:43.026Z |      1.6.0 | update-version: Default description option
+2023-01-20T09:16:15.230Z |      1.6.1 | update-version
+2023-02-04T21:09:26.071Z |      1.7.0 | update-version: Log items sequence changed
+2023-02-11T20:57:12.008Z |      1.8.0 | update-version: Config file
+2023-02-11T20:57:12.008Z |      1.8.1 | update-version: Fix
+2023-02-13T18:06:00.821Z |      1.8.2 | update-version: fix
+2023-02-13T18:06:00.821Z |      1.8.3 | update-version: Package & repository renaming to dev-utilities
+2023-02-17T16:10:49.609Z |      1.9.0 | update-version: Pre-release tags
+2023-02-18T11:09:53.090Z |      1.9.1 | update-version: Fix patch-only update with pre-release tags

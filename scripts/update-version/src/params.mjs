@@ -19,6 +19,12 @@ export const params = {
 
   preRealeaseTags: ['alpha', 'beta', 'rc'],
 
+  log_item: {
+    vers: null,
+    date: new Date().toISOString(),
+    descr: null
+  },
+
   // parametri elaborati
   cfg                 : {}, // oggetto config elaborato
   packageJsonContent  : {}, // viene impostato con l'oggetto ricavato da package.json

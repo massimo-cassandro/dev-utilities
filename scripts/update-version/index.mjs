@@ -23,7 +23,8 @@ const log = console.log;
 // se true utilizza come versione di partenza il valore della variabile `debug_start_release`
 // e non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
 const debug = false,
-  debug_start_release = '1.0.0';
+  debug_start_release = '1.0.0-beta.2';
+// process.argv.push('--patch-only'); // per debug
 
 
 try {
@@ -54,23 +55,19 @@ try {
     params.versionArray = params.oldVersion.split('.').map(i => +i);
   }
 
-  if(params.preRelease === false && params.versionArray.length > 3) {
+  if((params.preRelease === false && params.versionArray.length > 3) ||
+    (params.preRelease !== false && params.preRealeaseTags.indexOf(params.preRelease) === -1) // non dovrebbe essere necessario
+  ) {
     throw 'Pre-release tag non mappato';
   }
 
   // ********************************************
 
-  params.log_item = {
-    vers: null,
-    date: new Date().toISOString(),
-    descr: null
-  };
-
   const runUpdate = (mode) => {
 
     updateVersion(mode);
 
-    params.log_item.vers =  params.newVersion;
+    params.log_item.vers = params.newVersion;
 
     if(params.log_item.descr) {
       clipboard.writeSync(params.log_item.vers + ' - ' + params.log_item.descr);
@@ -85,7 +82,6 @@ try {
     }
 
   }; // end runUpdate
-
 
   // ********************
 
@@ -142,27 +138,21 @@ try {
       // parametri cli con precedenza rispetto a quelli del file cfg
       if(process.argv.findIndex(el => el === '--patch-only') !== -1) {
         params.cfg.patchOnly = true;
-        console.log('aaa');
       }
+
       if(process.argv.findIndex(el => el === '--skip-descr-prompt') !== -1) {
         params.cfg.skipDescrPrompt = true;
       }
 
       log(chalk.dim(`\nVersione package.json attuale: ${params.oldVersion}\n`));
 
-      if(params.cfg.patchOnly) {
-        runUpdate('patch');
-
-      } else {
-
-        (async () => {
-          const choice = await chooser();
-          // console.log(`\n******\n${choice}\n**********\n`);
-          runUpdate(choice);
-        })();
-
-      } // end else if patchOnly
-
+      (async () => {
+        const choice = await chooser();
+        if(debug) {
+          console.log(`\n**********\n${choice}\n**********\n`);
+        }
+        runUpdate(choice);
+      })();
 
     })
     .catch(err => {

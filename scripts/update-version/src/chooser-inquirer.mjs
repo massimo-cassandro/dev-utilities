@@ -57,60 +57,74 @@ export async function chooser() {
     );
   }
 
-  return await inquirer
-    .prompt([
-      {
-        type: 'list',
-        default: 0,
-        name: 'mode',
-        message: 'Aggiorna:',
-        choices: choices_array
-      }
-    ])
-    .then( answer => {
+  return await (async() => {
 
-      if(/\+pre$/.test(answer.mode)) {
+    if(params.cfg.patchOnly) {
 
-        return (async () => {
+      return {
+        mode: params.preRelease === false? 'patch' : 'upd-prerelease'
+      };
 
-          return await inquirer
-            .prompt([
-              {
-                type: 'list',
-                name: 'tag',
-                message: 'Pre-release tag:',
-                default: 3,
-                choices: params.preRealeaseTags.map(tag => {
-                  return {
-                    name: tag,
-                    value: tag
-                  };
-                })
-                  .concat([
-                    {
-                      name: 'Annulla',
-                      value: 'annulla',
-                    }
-                  ])
-              }
-            ])
-            .then((answerTag) => {
+    } else {
 
-              if(answerTag.tag !== 'annulla') {
+      return await inquirer
+        .prompt([
+          {
+            type: 'list',
+            default: 0,
+            name: 'mode',
+            message: 'Aggiorna:',
+            choices: choices_array
+          }
+        ])
+        .then( answer => {
 
-                answer.mode = 'add-pre|' + answer.mode.replace('+pre', `|${answerTag.tag}`);
-              } else {
-                answer.mode = 'annulla';
-              }
-              return answer;
+          if(/\+pre$/.test(answer.mode)) {
 
-            });
-        })();
+            return (async () => {
 
-      } else {
-        return answer;
-      }
-    })
+              return await inquirer
+                .prompt([
+                  {
+                    type: 'list',
+                    name: 'tag',
+                    message: 'Pre-release tag:',
+                    default: 3,
+                    choices: params.preRealeaseTags.map(tag => {
+                      return {
+                        name: tag,
+                        value: tag
+                      };
+                    })
+                      .concat([
+                        {
+                          name: 'Annulla',
+                          value: 'annulla',
+                        }
+                      ])
+                  }
+                ])
+                .then((answerTag) => {
+
+                  if(answerTag.tag !== 'annulla') {
+
+                    answer.mode = 'add-pre|' + answer.mode.replace('+pre', `|${answerTag.tag}`);
+                  } else {
+                    answer.mode = 'annulla';
+                  }
+                  return answer;
+
+                });
+            })();
+
+          } else {
+            return answer;
+          }
+        });
+
+    } // end else if patchOnly
+
+  })()
     .then( answer => {
 
       if(answer.mode !== 'annulla') {
