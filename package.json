@@ -1,13 +1,13 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs"
   },
   "type": "module",
   "scripts": {
-    "update-version": "npx update-version"
+    "update-version": "node ./scripts/update-version/index.mjs"
   },
   "publishConfig": {
     "access": "public"

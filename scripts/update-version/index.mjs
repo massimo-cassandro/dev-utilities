@@ -39,10 +39,18 @@ try {
 
   } else {
 
+    if(!fs.existsSync(params.packageJsonFile)) {
+      throw `File '${params.packageJsonFile}' non trovato`;
+    }
 
     let file_content = fs.readFileSync(params.packageJsonFile, 'utf8');
     params.packageJsonContent = JSON.parse(file_content);
-    params.oldVersion = params.packageJsonContent.version.toLowerCase();
+
+    params.oldVersion = params.packageJsonContent.version?.toLowerCase();
+
+    if(!params.oldVersion) {
+      throw `Proprietà 'version' di '${params.packageJsonFile}' non presente`;
+    }
   }
 
   if(params.preRealeaseTags.some(tag => params.oldVersion.indexOf(`-${tag}.`) !== -1 )) {

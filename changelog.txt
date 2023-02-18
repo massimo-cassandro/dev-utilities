@@ -22,3 +22,5 @@
 2023-02-18T15:07:56.671Z |      1.9.1 | 
 2023-02-18T16:24:22.085Z |      1.9.1 | 
 2023-02-18T16:24:52.229Z |      1.9.2 | Added `bin` property to package.json
+2023-02-18T16:49:15.524Z |      1.9.2 | 
+2023-02-18T17:02:04.378Z |      1.9.3 | Update-version: gestione errori package.json
