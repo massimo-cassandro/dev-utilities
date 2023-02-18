@@ -29,7 +29,7 @@ export async function chooser() {
       },
       {
         name: 'Annulla',
-        value: 'annulla',
+        value: null,
       }
     ];
 
@@ -99,18 +99,18 @@ export async function chooser() {
                       .concat([
                         {
                           name: 'Annulla',
-                          value: 'annulla',
+                          value: null,
                         }
                       ])
                   }
                 ])
                 .then((answerTag) => {
 
-                  if(answerTag.tag !== 'annulla') {
+                  if(answerTag.tag !== null) {
 
                     answer.mode = 'add-pre|' + answer.mode.replace('+pre', `|${answerTag.tag}`);
                   } else {
-                    answer.mode = 'annulla';
+                    answer.mode = null;
                   }
                   return answer;
 
@@ -127,7 +127,7 @@ export async function chooser() {
   })()
     .then( answer => {
 
-      if(answer.mode !== 'annulla') {
+      if(answer.mode !== null) {
 
         if(!params.cfg.skipDescrPrompt) {
 

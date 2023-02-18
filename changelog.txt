@@ -17,10 +17,7 @@
 2023-02-13T18:06:00.821Z |      1.8.3 | update-version: Package & repository renaming to dev-utilities
 2023-02-17T16:10:49.609Z |      1.9.0 | update-version: Pre-release tags
 2023-02-18T11:09:53.090Z |      1.9.1 | update-version: Fix patch-only update with pre-release tags
-2023-02-18T15:01:34.340Z |      1.9.1 | 
-2023-02-18T15:07:26.956Z |      1.9.1 | 
-2023-02-18T15:07:56.671Z |      1.9.1 | 
-2023-02-18T16:24:22.085Z |      1.9.1 | 
 2023-02-18T16:24:52.229Z |      1.9.2 | Added `bin` property to package.json
-2023-02-18T16:49:15.524Z |      1.9.2 | 
+2023-02-18T16:49:15.524Z |      1.9.2 |
 2023-02-18T17:02:04.378Z |      1.9.3 | Update-version: gestione errori package.json
+2023-02-18T18:11:42.581Z |      1.9.4 | Update-version: fix

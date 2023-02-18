@@ -163,7 +163,9 @@ try {
         if(debug) {
           console.log(`\n**********\n${choice}\n**********\n`);
         }
-        runUpdate(choice);
+        if(choice) {
+          runUpdate(choice);
+        }
       })();
 
     })
