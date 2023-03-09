@@ -7,8 +7,8 @@ import chalk from 'chalk';
 
 export default async function (configFile, property) {
 
-  configFile = path.resolve('./', configFile || './dev-utilities.config.js');
-  // configFile = configFile || './dev-utilities.config.js';
+  configFile = path.resolve('./', configFile || './dev-utilities.config.mjs');
+  // configFile = configFile || './dev-utilities.config.mjs';
   try {
 
     if(!fs.existsSync(configFile)) {

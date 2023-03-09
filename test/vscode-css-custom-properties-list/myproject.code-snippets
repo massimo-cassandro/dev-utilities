@@ -1,0 +1,23 @@
+{
+
+  "custom props list": {
+    "scope": "scss,css,javascript,javascriptreact,js,jsx,styled-css,jsx-attr,html",
+    "prefix": ["var("],
+    "body": []
+  },
+  "icons list": {
+    "scope": "scss,css,javascript,javascriptreact,js,jsx,styled-css,jsx-attr,html",
+    "prefix": ["icon"],
+    "body": []
+  },
+
+  // a comment
+  "another snippet": {
+    "scope": "html",
+    "prefix": "heading",
+    "body": [
+      "<h1></h1>",
+      // commented option "<h2></h2>"
+    ]
+  },
+}

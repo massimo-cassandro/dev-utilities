@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser';
+import { terser } from '@rollup/plugin-terser';
 import node_resolve from '@rollup/plugin-node-resolve';
 // import fs from 'fs'; // per config dinamico
 // import commonjs from '@rollup/plugin-commonjs'; // per importazione file umd

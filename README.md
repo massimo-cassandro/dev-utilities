@@ -17,10 +17,10 @@ Se un tag pre-release viene rilevato nella versione corrente, si può scegliere,
 Utilizzo:
 
 ```bash
-npx update-version --config=./dev-utilities.config.js
+npx update-version --config=./dev-utilities.config.mjs
 ```
 
-In cui  `--config=<path>` indica il percorso al file `.js` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.js`.
+In cui  `--config=<path>` indica il percorso al file `.mjs` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.mjs`.
 
 La proprietà `updateVersion` può contenere:
 
@@ -94,11 +94,11 @@ se presenti, prevalgono sulle eventuali impostazioni presenti nel file di config
 
 Estrae dalla lista di file `.css` indicati l'elenco delle *custom properties* e genera uno *snippet vscode*.
 
-Opzionalmente produce anche uno snippet con le icone del progetto vscode.
+Per altre info vedi [A Custom Properties Snippet Builder for VS Code](https://medium.com/me/stats/post/e6f415f2ccd7).
 
-È necessario predisporre preventivamente gli elementi necessari nel file snippet vscode.
+Opzionalmente produce anche uno snippet con un elenco delle icone utilizzate nel progetto. NB: questa funzionalità è estremamente elementare e limitata, al momento, alla presenza di elenchi file icone, tipecamente prodotti da script gulp o simili.
 
-Package json scripts item
+È necessario predisporre preventivamente gli elementi necessari nel file snippet vscode:
 
 ```json
 {
@@ -114,29 +114,119 @@ Package json scripts item
     "body": []
   }
 }
+```
 
+Utilizzo:
+
+```bash
+npx css-properties-list --config=./dev-utilities.config.mjs
+```
+
+In cui  `--config=<path>` indica il percorso al file `.mjs` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `cssPropsList`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.mjs`.
+
+La proprietà `cssPropsList`contiene:
+
+```javascript
+const config = {
+  cssPropsList: {
+    
+    /*
+      percorso ai file css da analizzare
+      deve essere presente almeno un file
+    */
+    sources: [
+      './path/to/file.css'
+    ],
+
+    /*
+      percorso al file snippets vscode
+    */
+    snippet_file: './.vscode/myproject.code-snippets',
+
+    /*
+      Facoltativo (default null)
+      percorso del file css in cui elencare tutte le custom properties rilevate
+      Omettere o impostare a `null` per disattivare
+    */
+    result_test_file: './path/to/css-debug-file.css',
+
+    /*
+      chiave della proprietà del file snippets VSCode in cui registare l'elenco delle custom properties
+    */
+    snippet_key: 'custom properties list',
+
+    /*
+      Facoltativo (default null)
+      Eventuale prefisso anteposto al nome della custom property
+      (es. --prefix-color: #c00)
+    */
+    custom_var_prefix: 'prefix-',
+
+    /*
+      Facoltativo (default null)
+      percorso al file js contenente l'elenco di icone del progetto.
+      Il file deve esportare un array di nomi icone 
+      Omettere o impostare a `null` o `[]` per disattivare questa funzionalità
+    */
+    icon_file_list: './path/to/file.js',
+
+    /*
+      Facoltativo (default null)
+      chiave della proprietà del file snippets VSCode in cui registare l'elenco delle icone
+      Omettere o impostare a `null` per disattivare questa funzionalità
+    */
+    icon_list_snippet_key: 'icons list'
+
+  }
+}
 ```
 
 
 
-## File di configurazione
+## Esempi e file di configurazione
 
-Il file di configurazione di `dev-utilities` permette la definizione dei parametri per tutti script presenti. Nessun parametro è obbligatorio, quelli presenti sono i valori di default:
+file `dev-utilities.config.mjs`:
 
 ```javascript
+
 const config = {
-  updateVersion: { 
-    wigVarsFile      : null,
-    htmlFiles        : null,
-    skipDescrPrompt  : false,
-    patchOnly        : false,
-    defaultDescr     : null
+  /*
+    Configurazione per `update-version`
+    Nessun parametro è obbligatorio
+  */
+  updateVersion: {
+    twigVarsFile     : null,   // default null
+    htmlFiles        : null,   // default null
+    skipDescrPrompt  : false,  // default false
+    patchOnly        : false,  // default false
+    defaultDescr     : null    // default null
   },
-  getCssProps: {/* cfg */}
+
+  /*
+    Configurazione per `vscode-css-properties-list`
+  */
+  cssPropsList: {
+
+    sources: [
+      './test/vscode-css-custom-properties-list/test.css'
+    ],
+    snippet_file           : './test/vscode-css-custom-properties-list/myproject.code-snippets',
+    result_test_file       : './test/vscode-css-custom-properties-list/css-debug-file.css',
+    snippet_key            : 'custom props list',
+    custom_var_prefix      : 'prefix-',
+    icon_sources: [
+      './test/vscode-css-custom-properties-list/icon-list.js'
+    ],
+    icon_list_snippet_key  : 'icons list'
+
+  }
 };
 
 export default config;
 ```
+
+Nella directory `test` è presente un file di configurazione di prova ed altri esempi.
+
 
 ## Utilizzo nella sezione script del file `package.json`
 
@@ -145,7 +235,8 @@ Esempio di implementazione:
 ```json
 {
   "scripts": {
-     "update-version": "npx update-version --config=./dev-utilities.config.js"
+     "update-version": "npx update-version --config=./dev-utilities.config.mjs",
+     "build vscode props list": "npx vscode-css-properties-list --config=./dev-utilities.config.mjs",
   }
 }
 

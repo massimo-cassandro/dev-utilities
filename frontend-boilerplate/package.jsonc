@@ -1,0 +1,113 @@
+{
+  "name": "@massimo-cassandro/xxxxx",
+  "description": "",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Massimo Cassandro",
+  "main": "index.js",
+  // "type":"module",
+  // "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massimo-cassandro/xxxxxx.git#main"
+  },
+  "bugs": {
+    "url": "https://github.com/xxxx/issues"
+  },
+
+  // "homepage": "https://github.com/xxxx#readme",
+  "keywords": [],
+  "scripts": {
+    "*** INST BASIC ***": "npm i @massimo-cassandro/dev-utilities @massimo-cassandro/linters-config --save-dev",
+    "*** INST js-utilities": "npm i --save @massimo-cassandro/js-utilities",
+    "*** INST modal-alert": "npm i --save @massimo-cassandro/modal-alert",
+    "*** INST json-table": "npm i --save @massimo-cassandro/json-table",
+    "*** INST js-file-uploader": "npm i --save @massimo-cassandro/js-file-uploader",
+    "*** INST scss-utilities": "npm i --save @massimo-cassandro/scss-utilities",
+    "*** INST ckeditor-utilities": "npm i --save @massimo-cassandro/ckeditor-utilities",
+    "*** INST cookie-consent": "npm i --save @massimo-cassandro/cookie-consent",
+    "*** INST sharing-links": "npm i --save @massimo-cassandro/sharing-links",
+
+    "*** INST bootstrap": "npm i --save bootstrap",
+
+    "*** INST rollup": "npm i --save-dev --omit=optional rollup@latest @rollup/plugin-terser @rollup/plugin-node-resolve @rollup/plugin-commonjs",
+    "*** INST sass cli": "npm i --save-dev --omit=optional sass",
+    "*** INST postcss cli": "npm i --save-dev --omit=optional  postcss postcss-cli @fullhuman/postcss-purgecss autoprefixer postcss-csso",
+    "*** INST sass+postcss gulp": "npm i --save-dev --omit=optional postcss @fullhuman/postcss-purgecss autoprefixer postcss-csso sass gulp gulp-using gulp-postcss gulp-sass gulp-sourcemaps",
+
+    "*** INST fontsource": "npm i --save @fontsource/xxxxx",
+    "*** INST gulp (std icone)": "npm i --save-dev --omit=optional gulp@latest gulp-dom gulp-rename gulp-replace gulp-svgmin gulp-svgstore gulp-jsbeautifier gulp-concat gulp-flatmap gulp-inject-string",
+    "*** INST gulp-wrap (icone react)": "npm i --save-dev --omit=optional gulp-wrap",
+    "*** INST prismjs": "npm i --save-dev --omit=optional prismjs",
+
+    "rollup": "npx rollup --config ./config/rollup.config.mjs --watch",
+    "sass+postcss": "npm run sass-cli & npm run postcss-cli",
+    "sass-cli": "npx sass ./source/:./target/ --load-path=./node_modules/ --load-path=./front-end/icone/ --style=compressed --watch",
+    "postcss-cli": "npx postcss ../public/css/**/*.css --dir ../public/css/ --config ./scripts/ --map --verbose --watch",
+    "webpack DEV": "NODE_ENV=development webpack serve --config ./config/webpack-config/webpack.dev.js",
+    "build-css-custom-prop-list": "node './scripts/get-css-custom-properties-list.mjs'",
+    "build_icons": "cd ./front-end/icone && gulp",
+
+    "build-breakpoints-scss": "node ./scripts/build-scss-breakpoint.mjs --input-type=module",
+    "email-css": "npx sass ./front-end/email/:./AppBundle/Resources/views/_email/_tpl --load-path=./node_modules/ --no-source-map --style=compressed --watch",
+    "presass": "npm run 'build-breakpoints-scss'",
+    "sass-script": "sh ./frontend-src/run-sass.sh",
+    "postcss-script": "sh ./frontend-src/postcss/run-postcss.sh",
+    "UPD-version": "npx update-version --config=./dev-utilities.config.mjs",
+    "upd @m": "npm update @massimo-cassandro/linters-config @massimo-cassandro/dev-utilities @massimo-cassandro/js-utilities @massimo-cassandro/modal-alert @massimo-cassandro/js-file-uploader @massimo-cassandro/json-table @massimo-cassandro/ckeditor-utilities @massimo-cassandro/scss-utilities @massimo-cassandro/twig-utilities @massimo-cassandro/auto-datatables-bs5",
+    "npm update": "npm update",
+    "npm publish": "npm publish",
+    "local test server": "python3 -m http.server",
+    "php server": "php -S localhost:8000",
+
+    "webpack PROD": "NODE_ENV=production webpack --config ./config/webpack-config/webpack.prod.js"
+
+  },
+
+  "browserslist": [
+    "last 1 version",
+    "iOS >= 13",
+    "Safari >= 12",
+    "not ie <= 11",
+    "> 3% in IT"
+  ],
+  "stylelint": {
+    "extends": "@massimo-cassandro/linters-config/stylelintrc.js",
+    "ignoreFiles": ["**/*.css"]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "./node_modules/@massimo-cassandro/linters-config/eslintrc.js"
+    ],
+    "ignorePatterns": []
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "files": [
+    "dist/**/*.{css,js,map}",
+    "src/**/*.{scss,css,js,map}",
+    "js/**/*.{js,map}",
+    "scss/**/*.scss",
+    "index.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+
+}

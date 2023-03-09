@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser';
+import terser  from '@rollup/plugin-terser';
 // import sourcemaps from 'rollup-plugin-sourcemaps';
 import fs from 'fs';
 import node_resolve from '@rollup/plugin-node-resolve';

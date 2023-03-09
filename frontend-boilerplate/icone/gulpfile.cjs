@@ -20,7 +20,7 @@ const gulp = require('gulp')
 ;
 
 
-let icon_list = []; // lista delle icone, utilizzate per il file demo
+let icons_list = []; // lista delle icone, utilizzate per il file demo
 
 const svg_files_folder = 'svg-files',
   svg_files_prefix = '',
@@ -36,7 +36,7 @@ const svg_files_folder = 'svg-files',
   components_remove_strings = ['ui-'],
   components_file = 'icons.jsx', // all'interno di components_dest_folder
   output_file = 'icone-ada.svg',
-  icon_list_file = 'icon-list.mjs',
+  icons_list_file = 'icon-list.mjs',
   tpl_demo_file = './tpl/demo-icone-tpl.html',
   svg_to_scss = ['freccia', 'ui-errore', 'ui-info', 'ui-success', 'ui-avviso', 'ada-icona'], // icone da convertire in variabili scss
   icons_scss_file = '_icone-svg.scss',
@@ -78,7 +78,7 @@ gulp.task('icone', function() {
       //   path.basename = path.basename.replace(/-line$/, '');
       //   line_icons.push(path.basename);
       // }
-      icon_list.push(path.basename);
+      icons_list.push(path.basename);
 
       return path;
     }))
@@ -108,14 +108,16 @@ gulp.task('icone', function() {
 });
 
 
-gulp.task('icon_list', function(cb) {
+gulp.task('icons_list', function(cb) {
   var str = '// lista id icone per demo e altro\n' +
-    '// NB: questo file è generato dinamicamente, eventuali modifiche saranno sovrascritte\n\n' +
-    'export const icon_list = ' + JSON.stringify(icon_list.sort(), null, '  ').replace(/"/g, '\'') + ';';
+    '// NB: questo file è generato dinamicamente, eventuali modifiche saranno sovrascritte.\n\n' +
+    '// NB: questo file non è utilizzato nella demo, viene generato solo a scopo di controllo\n' +
+    '//     o per eventuali altri utilizzi nel progetto.\n\n' +
+    'export const icons_list = ' + JSON.stringify(icons_list.sort(), null, '  ').replace(/"/g, '\'') + ';';
 
-  //str +=  '\n\nexport default icon_list;';
+  //str +=  '\n\nexport default icons_list;';
 
-  return fs.writeFile(icon_list_file, str, cb);
+  return fs.writeFile(icons_list_file, str, cb);
 });
 
 // creazione file html standalone per la consultazione
@@ -133,10 +135,10 @@ gulp.task('demo_file', function() {
     .pipe(dom(function(){
       const wrapper = this.querySelector('.icon-wrapper');
       wrapper.insertAdjacentHTML('afterend',
-        `<script>const icon_list = ${JSON.stringify(icon_list.sort(), null, '  ').replace(/"/g, '\'')};</script>`
+        `<script>const icons_list = ${JSON.stringify(icons_list.sort(), null, '  ').replace(/"/g, '\'')};</script>`
       );
       return this.body.insertAdjacentHTML('beforeend',
-        icone
+        `<div hidden>${icone}</div>`
       );
     }))
     .pipe(beautify({
@@ -197,7 +199,7 @@ export default function (props) {
     </BaseIcon>
   );
 }`;
-gulp.task('icon_components', function () {
+gulp.task('icons_components', function () {
   return gulp.src([
     components_source_folder + '/*.svg'
   ].concat(components_extra_icons))
@@ -274,10 +276,10 @@ gulp.task('default',
     // 'icone',
     gulp.parallel(
       'icone',
-      'icon_components'
+      'icons_components'
     ),
     gulp.parallel(
-      'icon_list',
+      'icons_list',
       'icons_component_main',
       'svg2scss',
       'demo_file'

@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs"
@@ -38,6 +38,10 @@
   "files": [
     "scripts/**/*"
   ],
+  "engines": {
+    "node": ">= 16.17.0",
+    "npm": ">= 9.6.0"
+  },
   "dependencies": {
     "chalk": "^5.1.2",
     "clipboardy": "^3.0.0",

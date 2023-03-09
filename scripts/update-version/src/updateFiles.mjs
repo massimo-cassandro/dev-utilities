@@ -18,7 +18,7 @@ export function updateFiles() {
   if(params.cfg.twigVarsFile) {
 
     let file_content = fs.readFileSync(params.cfg.twigVarsFile, 'utf8');
-    file_content = file_content.replace(/vers: '\d+\.\d+\.\d+'/, `vers: '${params.newVersion}'`);
+    file_content = file_content.replace(/vers *: '\d+\.\d+\.\d+(-.*?)?'/, `vers: '${params.newVersion}'`);
     fs.writeFileSync(params.cfg.twigVarsFile, file_content);
     log(chalk.dim(`\nAggiornamento file twig: ${params.cfg.twigVarsFile}`));
   }
