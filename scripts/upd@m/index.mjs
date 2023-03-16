@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable no-console */
 /* eslint-env node */
 
@@ -17,7 +19,7 @@ try {
     throw `\n-------------\n${folder} non presente.\n--------------\n`;
   }
 
-  console.log( chalk.green.bold( `\n\n${folder}: packages presenti:\n` ) );
+  console.log( chalk.green.bold( `\n${folder}: packages presenti:` ) );
 
   fs.readdirSync(folder).forEach(item => {
     let stats = fs.statSync(`${folder}/${item}`); // stats.isFile() / stats.isDirectory()
@@ -33,7 +35,7 @@ try {
         packageName = packageJsonContent.name;
 
       packages.push(packageName);
-      console.log( chalk.green( `* ${packageName}\n` ) );
+      console.log( chalk.green( `* ${packageName}` ) );
     }
   });
 
