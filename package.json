@@ -1,10 +1,10 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
-    "upd@m": "./scripts/upd@m/index.js"
+    "upd@m": "./scripts/upd@m/index.mjs"
   },
   "type": "module",
   "scripts": {
