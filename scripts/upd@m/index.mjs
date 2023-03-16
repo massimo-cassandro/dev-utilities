@@ -19,8 +19,6 @@ try {
     throw `\n-------------\n${folder} non presente.\n--------------\n`;
   }
 
-  console.log( chalk.green.bold( `\n${folder}: packages presenti:` ) );
-
   fs.readdirSync(folder).forEach(item => {
     let stats = fs.statSync(`${folder}/${item}`); // stats.isFile() / stats.isDirectory()
     if(stats.isDirectory()) {
@@ -35,7 +33,6 @@ try {
         packageName = packageJsonContent.name;
 
       packages.push(packageName);
-      console.log( chalk.green( `* ${packageName}` ) );
     }
   });
 
@@ -43,7 +40,8 @@ try {
     execSync(`npm update ${packages.join(' ')}`, {stdio: 'inherit'});
   }
 
-  console.log( chalk.green.bold( '\n\nAggiornamento completato.\n' ) );
+  console.log( chalk.green( '\n' + packages.map(i => `  • ${i}`).join('\n') ) );
+  console.log( chalk.bgGreen.bold( '\n Aggiornamento completato. \n' ) );
 
 } catch(e) {
   console.error( chalk.red( e ) );
