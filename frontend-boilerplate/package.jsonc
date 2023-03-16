@@ -58,7 +58,7 @@
     "sass-script": "sh ./frontend-src/run-sass.sh",
     "postcss-script": "sh ./frontend-src/postcss/run-postcss.sh",
     "UPD-version": "npx update-version --config=./dev-utilities.config.mjs",
-    "upd @m": "npm update @massimo-cassandro/linters-config @massimo-cassandro/dev-utilities @massimo-cassandro/js-utilities @massimo-cassandro/modal-alert @massimo-cassandro/js-file-uploader @massimo-cassandro/json-table @massimo-cassandro/ckeditor-utilities @massimo-cassandro/scss-utilities @massimo-cassandro/twig-utilities @massimo-cassandro/auto-datatables-bs5",
+    "upd@m": "npx upd@m",
     "npm update": "npm update",
     "npm publish": "npm publish",
     "local test server": "python3 -m http.server",

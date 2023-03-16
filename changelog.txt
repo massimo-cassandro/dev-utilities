@@ -21,3 +21,4 @@
 2023-02-18T17:02:04.378Z |            1.9.3 | Update-version: gestione errori package.json
 2023-02-18T18:11:42.581Z |            1.9.4 | Update-version: fix
 2023-03-09T15:25:57.266Z |            1.9.5 | Updated version string length in log file
+2023-03-16T18:29:35.669Z |           1.10.0 | upd@m

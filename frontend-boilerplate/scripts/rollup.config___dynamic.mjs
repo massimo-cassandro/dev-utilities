@@ -4,6 +4,8 @@ import fs from 'fs';
 import node_resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
+import p from '../package.json'; // assert { type: 'json' };
+
 const terserOptions = {
     compress: {
       passes: 2
@@ -57,7 +59,15 @@ dirs.forEach(dir => {
             format: format,
             sourcemap: true,
             name: name,
-            banner: `/*! ADA v.2.x - Massimo Cassandro ${anno} */`,
+            banner: `/*! xxxx v.${p.version} - Massimo Cassandro ${anno} */`,
+            footer: `//! Released on ${new Date().toLocaleString('it-IT', {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit', // 'numeric
+              hour12: false,
+              hour:'2-digit',
+              minute:'2-digit'
+            })}`
           }]
         }
       );
