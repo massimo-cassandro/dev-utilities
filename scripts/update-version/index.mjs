@@ -22,11 +22,8 @@ import { chooser } from './src/chooser-inquirer.mjs';
 
 const log = console.log;
 
-// se true utilizza come versione di partenza il valore della variabile `debug_start_release`
-// e non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
-const debug = false,
-  debug_start_release = '1.0.0-beta.2';
-// process.argv.push('--patch-only'); // per debug
+// se true non scrive nulla ma restituisce in console l'oggetto dei parametri elaborati
+const debug = false;
 
 
 try {
@@ -34,23 +31,22 @@ try {
   // lettura versione e inizializzazione variabili
   params.preRelease = false;
 
-  if(debug) {
-    params.oldVersion = debug_start_release.toLowerCase();
+  // avvio nuovo progetto (cghangelog.txt non presente):
+  // viener aggiunta l'opzione di utiilizzare la versione package json corrente
+  params.startProj = !fs.existsSync(params.logFile);
 
-  } else {
 
-    if(!fs.existsSync(params.packageJsonFile)) {
-      throw `File '${params.packageJsonFile}' non trovato`;
-    }
+  if(!fs.existsSync(params.packageJsonFile)) {
+    throw `File '${params.packageJsonFile}' non trovato`;
+  }
 
-    let file_content = fs.readFileSync(params.packageJsonFile, 'utf8');
-    params.packageJsonContent = JSON.parse(file_content);
+  let file_content = fs.readFileSync(params.packageJsonFile, 'utf8');
+  params.packageJsonContent = JSON.parse(file_content);
 
-    params.oldVersion = params.packageJsonContent.version?.toLowerCase();
+  params.oldVersion = params.packageJsonContent.version?.toLowerCase();
 
-    if(!params.oldVersion) {
-      throw `Proprietà 'version' di '${params.packageJsonFile}' non presente`;
-    }
+  if(!params.oldVersion) {
+    throw `Proprietà 'version' di '${params.packageJsonFile}' non presente`;
   }
 
   if(params.preRealeaseTags.some(tag => params.oldVersion.indexOf(`-${tag}.`) !== -1 )) {
@@ -154,6 +150,13 @@ try {
 
       if(process.argv.findIndex(el => el === '--skip-descr-prompt') !== -1) {
         params.cfg.skipDescrPrompt = true;
+      }
+
+      // forzatura di alcune parametri per l'avvio di nuovi progetti
+      if(params.startProj) {
+        params.cfg.defaultDescr = 'Setup';
+        params.cfg.skipDescrPrompt = false;
+        params.cfg.patchOnly = false;
       }
 
       log(chalk.dim(`\nVersione package.json attuale: ${params.oldVersion}\n`));

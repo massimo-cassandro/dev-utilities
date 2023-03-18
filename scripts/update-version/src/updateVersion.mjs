@@ -11,6 +11,7 @@ import { params } from './params.mjs';
 
 export function updateVersion(mode) {
 
+
   if(mode === 'major') {
     params.versionArray[0]++;
     params.versionArray[1] = 0;
@@ -49,8 +50,12 @@ export function updateVersion(mode) {
 
     params.versionArray.push(tag, 1);
 
-  }
+  } /* else if(mode === 'start-proj') {
+    // nessuna modifica
+  } */
 
   params.newVersion = params.versionArray.slice(0,3).join('.') +
     (params.versionArray.length > 3? `-${params.versionArray.slice(3).join('.')}` : '');
+
+
 }

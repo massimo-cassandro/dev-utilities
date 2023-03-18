@@ -245,6 +245,7 @@ Esempio di implementazione:
 ## TODO
 
 ### Update Version
+* opzione per creare solo il file changelog al primo lkancio, senza aggiornare la versione del package.json
 * opzione per non aggiornare html e twig ma solo package.json
 * https://github.com/natemoo-re/clack
 

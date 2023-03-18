@@ -57,6 +57,13 @@ export async function chooser() {
     );
   }
 
+  if( params.startProj ) {
+    choices_array.unshift({
+      name: `Crea file changelog con la versione attuale (${params.oldVersion})`,
+      value: 'start-proj'
+    });
+  }
+
   return await (async() => {
 
     if(params.cfg.patchOnly) {

@@ -1,28 +1,29 @@
-2022-10-31T10:00:00.000Z |            1.0.0 | update-version: First release
+2022-10-31T10:00:00.000Z |            1.0.0 | update-version: Prima release
 2022-10-31T10:12:00.000Z |            1.1.0 | update-version: Flags `--patch-only` e `--twig-vars-file`
-2022-11-19T14:19:59.295Z |            1.2.0 | update-version: changelog management (as json)
-2022-11-20T21:23:36.982Z |            1.3.0 | update-version: copy descr to clipboard
+2022-11-19T14:19:59.295Z |            1.2.0 | update-version: changelog file (json)
+2022-11-20T21:23:36.982Z |            1.3.0 | update-version: copia descr su clipboard
 2022-11-29T18:56:19.986Z |            1.3.1 | update-version
 2022-11-29T21:40:48.927Z |            1.3.2 | update-version
-2022-12-14T15:52:40.504Z |            1.4.0 | update-version: changelog file swithc to txt file
+2022-12-14T15:52:40.504Z |            1.4.0 | update-version: changelog file: switch da json a txt
 2022-12-14T16:12:54.734Z |            1.4.1 | update-version
 2022-12-15T09:11:11.172Z |            1.4.2 | update-version
-2022-12-18T16:40:14.687Z |            1.5.0 | update-version: HTML files version update
-2022-12-19T11:43:43.026Z |            1.6.0 | update-version: Default description option
+2022-12-18T16:40:14.687Z |            1.5.0 | update-version: aggiornamento versione su file HTML
+2022-12-19T11:43:43.026Z |            1.6.0 | update-version: Opzione Default description
 2023-01-20T09:16:15.230Z |            1.6.1 | update-version
-2023-02-04T21:09:26.071Z |            1.7.0 | update-version: Log items sequence changed
-2023-02-11T20:57:12.008Z |            1.8.0 | update-version: Config file
+2023-02-04T21:09:26.071Z |            1.7.0 | update-version: Cambio sequenza elementi del file log
+2023-02-11T20:57:12.008Z |            1.8.0 | update-version: File di configurazione
 2023-02-11T20:57:12.008Z |            1.8.1 | update-version: Fix
 2023-02-13T18:06:00.821Z |            1.8.2 | update-version: fix
-2023-02-13T18:06:00.821Z |            1.8.3 | update-version: Package & repository renaming to dev-utilities
+2023-02-13T18:06:00.821Z |            1.8.3 | update-version: Package & repository renaming (dev-utilities)
 2023-02-17T16:10:49.609Z |            1.9.0 | update-version: Pre-release tags
-2023-02-18T11:09:53.090Z |            1.9.1 | update-version: Fix patch-only update with pre-release tags
-2023-02-18T16:24:52.229Z |            1.9.2 | Added `bin` property to package.json
+2023-02-18T11:09:53.090Z |            1.9.1 | update-version: Fix aggiornamento patch-only con pre-release tags
+2023-02-18T16:24:52.229Z |            1.9.2 | Aggiunta proprietà `bin` al package.json
 2023-02-18T17:02:04.378Z |            1.9.3 | Update-version: gestione errori package.json
 2023-02-18T18:11:42.581Z |            1.9.4 | Update-version: fix
-2023-03-09T15:25:57.266Z |            1.9.5 | Updated version string length in log file
+2023-03-09T15:25:57.266Z |            1.9.5 | Cambio lunghezza elementi file di log
 2023-03-16T18:29:35.669Z |           1.10.0 | upd@m
 2023-03-16T18:35:29.251Z |           1.10.1 | fix
 2023-03-16T20:58:13.190Z |           1.10.2 | Fix
 2023-03-16T21:10:58.632Z |           1.10.3 | Update `upd@m`
-2023-03-18T17:31:53.152Z |           1.10.4 | upd@m: added `--save` flag to `npm update`
+2023-03-18T17:31:53.152Z |           1.10.4 | upd@m: aggiunta flag `--save` a `npm update`
+2023-03-18T22:06:44.332Z |           1.11.0 | Update-version: aggiunta opzione per avvio nuovi progetti
