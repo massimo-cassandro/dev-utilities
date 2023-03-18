@@ -37,7 +37,7 @@ try {
   });
 
   if(packages.length) {
-    execSync(`npm update ${packages.join(' ')}`, {stdio: 'inherit'});
+    execSync(`npm update --save ${packages.join(' ')}`, {stdio: 'inherit'});
   }
 
   console.log( chalk.green( '\n' + packages.map(i => `  • ${i}`).join('\n') ) );

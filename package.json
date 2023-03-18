@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.10.3",
+  "version": "1.10.4",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
@@ -10,7 +10,7 @@
   "scripts": {
     "update-version": "node ./scripts/update-version/index.mjs",
     "upd@m": "node ./scripts/upd@m/index.mjs",
-    "publish": "npm publish"
+    "npm-publish": "npm publish"
   },
   "publishConfig": {
     "access": "public"
