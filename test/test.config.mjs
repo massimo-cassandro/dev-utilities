@@ -22,14 +22,14 @@ const config = {
   cssPropsList: {
 
     sources: [
-      './test/vscode-css-custom-properties-list/test.css'
+      './test/vscode-css-custom-props-test/test.css'
     ],
-    snippet_file           : './test/vscode-css-custom-properties-list/myproject.code-snippets',
-    result_test_file       : './test/vscode-css-custom-properties-list/css-debug-file.css',
+    snippet_file           : './test/vscode-css-custom-props-test/myproject.code-snippets',
+    result_test_file       : './test/vscode-css-custom-props-test/css-debug-file.css',
     snippet_key            : 'custom props list',
     custom_var_prefix      : 'prefix-',
     icon_sources: [
-      './test/vscode-css-custom-properties-list/icon-list.js'
+      './test/vscode-css-custom-props-test/icon-list.js'
     ],
     icon_list_snippet_key  : 'icons list'
 

@@ -1,23 +1,25 @@
 {
-
   "custom props list": {
     "scope": "scss,css,javascript,javascriptreact,js,jsx,styled-css,jsx-attr,html",
-    "prefix": ["var("],
-    "body": []
+    "prefix": [
+      "var("
+    ],
+    "body": [
+      "var(--prefix-${1|border-radius,primary,secondary|})$0"
+    ]
   },
   "icons list": {
     "scope": "scss,css,javascript,javascriptreact,js,jsx,styled-css,jsx-attr,html",
-    "prefix": ["icon"],
+    "prefix": [
+      "icon"
+    ],
     "body": []
   },
-
-  // a comment
   "another snippet": {
     "scope": "html",
     "prefix": "heading",
     "body": [
-      "<h1></h1>",
-      // commented option "<h2></h2>"
+      "<h1></h1>"
     ]
-  },
+  }
 }

@@ -1,10 +1,11 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
-    "upd@m": "./scripts/upd@m/index.mjs"
+    "upd@m": "./scripts/upd@m/index.mjs",
+    "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs"
   },
   "type": "module",
   "scripts": {

@@ -90,13 +90,22 @@ vengono ignorati se il parametro `--config` è presente, mentre i parametri
 se presenti, prevalgono sulle eventuali impostazioni presenti nel file di configurazione
 
 
+## Update packages
+
+Esegue `npm update` per tutti i packeges installati all'interno di `node_modules/@massimo-cassandro`.
+
+```bash
+npx upd@m
+```
+
+
 ## custom properties list
 
 Estrae dalla lista di file `.css` indicati l'elenco delle *custom properties* e genera uno *snippet vscode*.
 
 Per altre info vedi [A Custom Properties Snippet Builder for VS Code](https://medium.com/me/stats/post/e6f415f2ccd7).
 
-Opzionalmente produce anche uno snippet con un elenco delle icone utilizzate nel progetto. NB: questa funzionalità è estremamente elementare e limitata, al momento, alla presenza di elenchi file icone, tipecamente prodotti da script gulp o simili.
+Opzionalmente produce anche uno snippet con un elenco delle icone utilizzate nel progetto. NB: questa funzionalità è estremamente elementare e limitata, al momento, alla presenza di elenchi file icone, tipicamente prodotti da script gulp o simili.
 
 È necessario predisporre preventivamente gli elementi necessari nel file snippet vscode:
 
@@ -236,6 +245,7 @@ Esempio di implementazione:
 {
   "scripts": {
      "update-version": "npx update-version --config=./dev-utilities.config.mjs",
+     "upd@m": "npx updd@m",
      "build vscode props list": "npx vscode-css-properties-list --config=./dev-utilities.config.mjs",
   }
 }
@@ -245,12 +255,12 @@ Esempio di implementazione:
 ## TODO
 
 ### Update Version
-* opzione per creare solo il file changelog al primo lkancio, senza aggiornare la versione del package.json
 * opzione per non aggiornare html e twig ma solo package.json
 * https://github.com/natemoo-re/clack
 
-### custom properties list
-* https://github.com/microsoft/node-jsonc-parser
+### vscode custom properties list
+* icon list
+* jsonc support: https://github.com/microsoft/node-jsonc-parser
 
 ### setup init
 * inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json
