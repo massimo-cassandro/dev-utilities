@@ -268,8 +268,5 @@ Esempio di implementazione:
 * icon list
 * jsonc support: https://github.com/microsoft/node-jsonc-parser
 
-### upd@m
-* nel riepilogo finale aggiungere versioni prima e dopo l'aggiornamento
-
 ### setup init
 * inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json

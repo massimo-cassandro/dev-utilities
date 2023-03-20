@@ -11,13 +11,15 @@ import {execSync} from 'child_process';
 
 
 const folder = './node_modules/@massimo-cassandro',
-  packages = [];
+  packages = {};
 
 try {
 
   if(!fs.existsSync(folder)) {
-    throw `\n-------------\n${folder} non presente.\n--------------\n`;
+    throw `${folder} non presente.`;
   }
+
+  let maxLength = [];
 
   fs.readdirSync(folder).forEach(item => {
     let stats = fs.statSync(`${folder}/${item}`); // stats.isFile() / stats.isDirectory()
@@ -26,23 +28,37 @@ try {
       const packageJsonFile = `${folder}/${item}/package.json`;
 
       if(!fs.existsSync(packageJsonFile)) {
-        throw `\n-------------\nFile 'package.json' in '${item}' non presente.\n--------------\n`;
+        throw `File 'package.json' in '${item}' non presente.`;
       }
 
-      const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8')),
-        packageName = packageJsonContent.name;
+      const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
 
-      packages.push(packageName);
+      packages[packageJsonContent.name] = {
+        file    : packageJsonFile,
+        oldVers : packageJsonContent.version
+      };
+
+      maxLength = Math.max(maxLength, packageJsonContent.name.length);
     }
   });
 
-  if(packages.length) {
-    execSync(`npm update --save ${packages.join(' ')}`, {stdio: 'inherit'});
+  if(Object.keys(packages).length) {
+    execSync(`npm update --save ${Object.keys(packages).join(' ')}`, {stdio: 'inherit'});
   }
 
-  console.log( chalk.green( '\n' + packages.map(i => `  • ${i}`).join('\n') ) );
+  // lettura versioni aggiornate
+  Object.keys(packages).forEach(p => {
+    const packageJsonContent = JSON.parse(fs.readFileSync(packages[p].file, 'utf8'));
+    packages[p].newVers = packageJsonContent.version;
+  });
+
+
+  console.log( '\n' + Object.keys(packages).map(p =>
+    chalk.green(`  • ${(p + '.'.repeat(maxLength)).slice(0, maxLength)}`) + ' : ' +
+    chalk[packages[p].oldVers === packages[p].newVers? 'green' : 'yellow'](`${packages[p].oldVers} => ${packages[p].newVers}`)
+  ).join('\n') );
   console.log( chalk.bgGreen.bold( '\n Aggiornamento completato. \n' ) );
 
 } catch(e) {
-  console.error( chalk.red( e ) );
+  console.error( chalk.red(`\n${e}\n`) );
 }

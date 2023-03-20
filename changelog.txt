@@ -29,3 +29,4 @@
 2023-03-17T18:06:44.332Z |           1.11.0 | Update-version: aggiunta opzione per avvio nuovi progetti
 2023-03-20T09:27:40.000Z |           1.12.0 | vscode custom properties list
 2023-03-20T17:26:51.925Z |           1.12.1 | vscode custom properties list upd
+2023-03-20T21:06:22.956Z |           1.12.2 | upd@m: aggiunta numero versione nel riepilogo
