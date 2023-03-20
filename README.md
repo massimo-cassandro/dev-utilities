@@ -166,23 +166,29 @@ const config = {
 
     /*
       Facoltativo (default null)
-      Eventuale prefisso anteposto al nome della custom property
+      Array di prefissi anteposti ai nomi delle custom properties
+      Se si utilizza un solo prefisso è possibile inserirlo come stringa
       (es. --prefix-color: #c00)
+      NB: includere sempre il carattere `-` finale
     */
-    custom_var_prefix: 'prefix-',
+    custom_var_prefix: ['prefix-'],
 
     /*
       Facoltativo (default null)
-      percorso al file js contenente l'elenco di icone del progetto.
+      array di percorsi ai file js contenenti l'elenco di icone del progetto.
       Il file deve esportare un array di nomi icone 
       Omettere o impostare a `null` o `[]` per disattivare questa funzionalità
+
+      NB: SUPPORTO LIMITATO A CASI SPECIFICI
     */
-    icon_file_list: './path/to/file.js',
+    icon_sources: ['./path/to/file.js'],
 
     /*
       Facoltativo (default null)
       chiave della proprietà del file snippets VSCode in cui registare l'elenco delle icone
       Omettere o impostare a `null` per disattivare questa funzionalità
+
+      NB: SUPPORTO LIMITATO A CASI SPECIFICI
     */
     icon_list_snippet_key: 'icons list'
 
@@ -222,7 +228,7 @@ const config = {
     snippet_file           : './test/vscode-css-custom-properties-list/myproject.code-snippets',
     result_test_file       : './test/vscode-css-custom-properties-list/css-debug-file.css',
     snippet_key            : 'custom props list',
-    custom_var_prefix      : 'prefix-',
+    custom_var_prefix      : ['prefix-'],
     icon_sources: [
       './test/vscode-css-custom-properties-list/icon-list.js'
     ],
@@ -261,6 +267,9 @@ Esempio di implementazione:
 ### vscode custom properties list
 * icon list
 * jsonc support: https://github.com/microsoft/node-jsonc-parser
+
+### upd@m
+* nel riepilogo finale aggiungere versioni prima e dopo l'aggiornamento
 
 ### setup init
 * inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json

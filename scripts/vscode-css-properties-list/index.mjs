@@ -27,6 +27,7 @@ try {
       }
 
       const params = {...default_params, ...parsedCfg};
+
       let custom_properties = [];
 
       // =>> check
@@ -37,6 +38,13 @@ try {
         throw `'${params.snippet_file}' non presente.`;
       }
 
+      params.custom_var_prefix = params.custom_var_prefix || null;
+
+      // se custom_var_prefix è una stringa, viene convertito in un array
+      if(params.custom_var_prefix && typeof params.custom_var_prefix === 'string') {
+        params.custom_var_prefix = [params.custom_var_prefix];
+      }
+
       params.sources.forEach(css_file => {
 
         if(!fs.existsSync(css_file)) {
@@ -45,7 +53,7 @@ try {
 
         let css_content = fs.readFileSync(css_file).toString();
 
-        const regex = new RegExp(`--${params.custom_var_prefix}[a-zA-Z0-9._-]*?: ?(.*?)[;}]`, 'gi'),
+        const regex = new RegExp(`--${params.custom_var_prefix? `(${params.custom_var_prefix.join('|')})` : ''}[a-zA-Z0-9._-]*?: ?(.*?)[;}]`, 'gi'),
           this_cust_props = css_content.match(regex);
 
         custom_properties = custom_properties.concat(this_cust_props);
@@ -71,9 +79,12 @@ try {
       custom_properties.sort();
       custom_properties = [...new Set(custom_properties)];
 
-      const vscode_snippet_body = `var(--${params.custom_var_prefix}\${1|` +
-        custom_properties.reduce((result,item) => `${result},${item}`).replaceAll(`--${params.custom_var_prefix}`, '') +
-        '|})$0';
+      // se c'è un solo prefisso, viene estratto dall'elenco delle variabili per renderle più leggibili,
+      // se invece sono presenti più prefissi, vengono mantenuti
+      const snippet_prefix = (params.custom_var_prefix != null && params.custom_var_prefix.length === 1)? `--${params.custom_var_prefix[0]}` : '',
+        vscode_snippet_body = `var(--${snippet_prefix}\${1|` +
+          custom_properties.reduce((result,item) => `${result},${item}`).replaceAll(`--${snippet_prefix}`, '') +
+          '|})$0';
 
       // VSCODE snippets reading and update
       let snippets = JSON.parse(fs.readFileSync(params.snippet_file).toString());
