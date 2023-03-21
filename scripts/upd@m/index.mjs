@@ -54,7 +54,7 @@ try {
 
 
   console.log( '\n' + Object.keys(packages).map(p =>
-    chalk.green(`  • ${(p + '.'.repeat(maxLength)).slice(0, maxLength)}`) + ' : ' +
+    chalk.green(`  • ${(p + ' '.repeat(maxLength)).slice(0, maxLength)}`) + ' : ' +
     chalk[packages[p].oldVers === packages[p].newVers? 'green' : 'yellow'](`${packages[p].oldVers} => ${packages[p].newVers}`)
   ).join('\n') );
   console.log( chalk.bgGreen.bold( '\n Aggiornamento completato. \n' ) );

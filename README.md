@@ -266,7 +266,7 @@ Esempio di implementazione:
 
 ### vscode custom properties list
 * icon list
-* jsonc support: https://github.com/microsoft/node-jsonc-parser
+* jsonc support: https://github.com/microsoft/node-jsonc-parser https://www.npmjs.com/package/comment-json
 
 ### setup init
 * inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json
