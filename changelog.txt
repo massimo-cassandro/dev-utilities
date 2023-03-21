@@ -31,3 +31,4 @@
 2023-03-20T17:26:51.925Z |           1.12.1 | vscode custom properties list upd
 2023-03-20T21:06:22.956Z |           1.12.2 | upd@m: aggiunta numero versione nel riepilogo
 2023-03-21T21:14:54.087Z |           1.12.3 | fix
+2023-03-21T21:31:52.633Z |           1.12.4 | 
