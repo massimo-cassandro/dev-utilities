@@ -1,50 +1,117 @@
-import { terser } from '@rollup/plugin-terser';
+import terser  from '@rollup/plugin-terser';
+import fs from 'fs';
 import node_resolve from '@rollup/plugin-node-resolve';
-// import fs from 'fs'; // per config dinamico
-// import commonjs from '@rollup/plugin-commonjs'; // per importazione file umd
-// import filesize from 'rollup-plugin-filesize';
-//import injectProcessEnv from 'rollup-plugin-inject-process-env'; // dove necessario (popper.js)
+import commonjs from '@rollup/plugin-commonjs';
 
-// import minifyHTML from 'rollup-plugin-minify-html-literals';
+// https://github.com/hyhappy/rollup-plugin-string-html
+// import htmlString from 'rollup-plugin-string-html';
 
+// https://github.com/exuanbo/rollup-plugin-minify-html-template-literals
+// https://github.com/asyncLiz/minify-html-literals
+// https://github.com/kangax/html-minifier#options-quick-reference
+// import minifyHTML from 'rollup-plugin-minify-html-template-literals';
+
+import p from '../package.json'; // assert { type: 'json' };
 
 const terserOptions = {
-  compress: {
-    passes: 2
+    compress: {
+      passes: 2
+    }
+  },
+  anno = new Date().getFullYear(),
+  dirs = [
+    {source_dir: './front-end/js', output_dir: './AppBundle/Resources/public/js'}
+  ];
+
+let config = [];
+
+// lettura subdir apps e aggiunta a `dirs`
+fs.readdirSync('./front-end/apps').forEach(item => {
+  let stats = fs.statSync(`./front-end/apps/${item}`); // stats.isFile() / stats.isDirectory()
+  if(stats.isDirectory()) {
+    dirs.push({
+      source_dir: `./front-end/apps/${item}`,
+      output_dir: `./AppBundle/Resources/public/apps/${item}`
+    });
   }
-};
+});
+
+dirs.forEach(dir => {
+
+  fs.readdirSync(dir.source_dir)
+    .filter(f => /\.js$/.test(f))
+    .filter(f => /^[^_]/.test(f)) // ignore files starting with _
+    .forEach(file => {
+
+      let format = 'iife',
+        name = null;
+
+      if(/(-umd\.js)$/.test(file)) {
+        format = 'umd';
+        name = file.replace('-umd.js', '').replace(/-/g, '_');
+      }
+
+      config.push(
+        {
+          // preserveEntrySignatures: false,
+          input: `${dir.source_dir}/${file}`,
+          plugins: [
+            // deve essere il primo
+            // minifyHTML({
+            //   options: {
+            //     minifyOptions: {
+            //       html5: true,
+            //       collapseWhitespace: true,
+            //       collapseInlineTagWhitespace: true,
+            //       conservativeCollapse: true,
+            //       decodeEntities: true
+            //     },
+            //     shouldMinify: () => true
+            //   },
+            // }),
+            node_resolve(),
+            commonjs(),
+            terser(terserOptions),
+          ],
+          output: [{
+            file: `${dir.output_dir}/${file.replace('.js', '-min.js')}`,
+            format: format,
+            sourcemap: true,
+            name: name,
+            banner: `/*! xxxx v.${p.version} - Massimo Cassandro ${anno} */`,
+            footer: `//! Released on ${new Date().toLocaleString('it-IT', {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit', // 'numeric
+              hour12: false,
+              hour:'2-digit',
+              minute:'2-digit'
+            })}`
+          }]
+        }
+      );
+
+    });
+});
+
+export default config;
+
+
+// versione statica
+/*
 
 export default [
   {
-    input: 'js/javascript-sandbox.js',
-    plugins: [
-      node_resolve(),
-      terser(terserOptions)
-      // minifyHTML(),
-      // commonjs(),
-      // filesize(),
-      // injectProcessEnv({
-      //   NODE_ENV: 'production'
-      // })
-    ],
+    input: 'input.js',
+    plugins: [ ... ],
     output: [
       {
-        file: 'js/javascript-sandbox.min.js',
+        file: 'output.min.js',
         format: 'iife',
         sourcemap: true
       }
     ]
   },
-  {
-    input: 'js/prism.js',
-    plugins: [sourcemaps(), resolve(), terser(terserOptions) /*, minifyHTML(),  */],
-    output: [
-      {
-        file: 'js/prism.min.js',
-        format: 'iife',
-        name: 'Prism',
-        sourcemap: false
-      }
-    ]
-  }
+  ...
 ];
+*/
