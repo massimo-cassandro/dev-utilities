@@ -32,3 +32,4 @@
 2023-03-20T21:06:22.956Z |           1.12.2 | upd@m: aggiunta numero versione nel riepilogo
 2023-03-21T21:14:54.087Z |           1.12.3 | fix
 2023-03-21T21:31:52.633Z |           1.12.4 | 
+2023-04-10T10:46:17.376Z |           1.12.5 | update-version fix

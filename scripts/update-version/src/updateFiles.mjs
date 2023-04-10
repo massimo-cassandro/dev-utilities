@@ -27,7 +27,8 @@ export function updateFiles() {
   if(params.cfg.htmlFiles) {
     params.cfg.htmlFiles.forEach(file => {
       let file_content = fs.readFileSync(file, 'utf8');
-      file_content = file_content.replace(/\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-(rc\.)?\d+)?/g, `.$1$2$3=${params.newVersion}`);
+      file_content = file_content
+        .replace(/(src|href)=("|')(.*?)\.(js|css)(\?|&)(_|v)=\d+\.\d+\.\d+(-(alpha|beta|rc)\.\d+)?/g, `$1=$2$3.$4$5$6=${params.newVersion}`);
       fs.writeFileSync(file, file_content);
       log(chalk.dim(`\nAggiornamento file html: ${file}`));
     });
