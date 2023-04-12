@@ -251,7 +251,7 @@ Esempio di implementazione:
 {
   "scripts": {
      "update-version": "npx update-version --config=./dev-utilities.config.mjs",
-     "upd@m": "npx updd@m",
+     "upd@m": "npx upd@m",
      "build vscode props list": "npx vscode-css-properties-list --config=./dev-utilities.config.mjs",
   }
 }
