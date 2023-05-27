@@ -1,11 +1,12 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.12.5",
+  "version": "1.13.0",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
     "upd@m": "./scripts/upd@m/index.mjs",
-    "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs"
+    "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs",
+    "create-favicons": "./scripts/create-favicons/index.cjs"
   },
   "type": "module",
   "scripts": {
@@ -39,7 +40,8 @@
     "extends": "@massimo-cassandro/linters-config/stylelintrc.js"
   },
   "files": [
-    "scripts/**/*"
+    "scripts/**/*",
+    "docs/**/*"
   ],
   "engines": {
     "node": ">= 16.17.0",
@@ -48,9 +50,15 @@
   "dependencies": {
     "chalk": "^5.1.2",
     "clipboardy": "^3.0.0",
-    "inquirer": "^9.1.4"
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "inquirer": "^9.1.4",
+    "sharp": "^0.32.1",
+    "svgo": "^3.0.2",
+    "to-ico": "^1.1.5"
   },
   "devDependencies": {
-    "@massimo-cassandro/linters-config": "^1.3.2"
+    "@massimo-cassandro/linters-config": "^1.4.0"
   }
 }
