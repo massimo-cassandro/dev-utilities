@@ -14,7 +14,7 @@ In sua assenza lo script agisce nella directory corrente.
 Lo script in prima battuta cerca nella dir di lavoro il file `create-favicons-cfg.mjs` che contiene un oggetto
 con tutti i parametri necessari (vedi di seguito).
 
-In sua assenza, cerca il file `favicon-src.svg` da utilizzare come sorgente per tutte le immagine, e assumendo i valori di default (vedi dopo) per tutti gli altri parametri. 
+In sua assenza, cerca il file `favicon-src.svg` da utilizzare come sorgente per tutte le immagini, e assumendo i valori di default (vedi dopo) per tutti gli altri parametri. 
 
 Tra gli altri, è possibile spcificare il parametro `small_src_img` nel caso sia necessario specificare un'immagine ottimizzata per le piccole dimensioni (32px).
 
@@ -41,6 +41,16 @@ npx create-favicons init
 
 Per creare un file di cfg base nella dir corrente.
 
+
+## Utilizzo da remoto
+
+I comandi possonoi essere eseguti anche senza installare preventivamente il package:
+
+```
+npx --package=@massimo-cassandro/dev-utilities create-favicons init
+npx --package=@massimo-cassandro/dev-utilities create-favicons --dir=...
+
+```
 
 Lo script produce le varie immagini png ed svg, il file `manifest.webmanifest` e uno snippet html (o nel linguaggio indicato nel parametro `snippet_language`).
 Tutte le immagini vengono ottimizzati con [SVGO](https://github.com/svg/svgo) e [imagemin](https://github.com/imagemin/imagemin).
