@@ -109,7 +109,7 @@ export function createFavicons(params) {
     const cache_buster = params.add_cache_buster? `?_=${Date.now()}` : '';
 
     let snippet_content = `<link rel="icon" href="${params.publicPath}favicon.ico${cache_buster}" sizes="any">\n` +
-      `<link rel="icon" href="${params.publicPath}icon.svg${cache_buster}" type="image/svg+xml">\n` +
+      `<link rel="icon" href="${params.publicPath}favicon.svg${cache_buster}" type="image/svg+xml">\n` +
       `<link rel="apple-touch-icon" href="${params.publicPath}apple-touch-icon.png${cache_buster}">\n` +
       `<link rel="manifest" href="${params.publicPath}manifest.webmanifest${cache_buster}">`;
 
