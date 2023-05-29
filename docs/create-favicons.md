@@ -31,6 +31,15 @@ const params = { /* ... */ };
 export default params;
 ```
 
+Utilizzare il comando
+
+```bash
+npx create-favicons init
+```
+
+Per creare un file di cfg base nella dir corrente.
+
+
 Lo script produce le varie immagini png ed svg, il file `manifest.webmanifest` e uno snippet html (o nel linguaggio indicato nel parametro `snippet_language`).
 Tutte le immagini vengono ottimizzati con [SVGO](https://github.com/svg/svgo) e [imagemin](https://github.com/imagemin/imagemin).
 
