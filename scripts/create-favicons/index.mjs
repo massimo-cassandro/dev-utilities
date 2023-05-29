@@ -12,6 +12,7 @@ import * as path from 'path';
 import { URL } from 'url';
 
 import chalk from 'chalk';
+import { printFrame } from '../shared/print-frame.mjs';
 
 import { createFavicons } from './src/create-favicons.mjs';
 import { defaults } from './src/defaults.mjs';
@@ -26,15 +27,15 @@ try {
 
     // const __filename = new URL('', import.meta.url).pathname;
     // Will contain trailing slash
-    const __dirname = new URL('.', import.meta.url).pathname,
-      cfg_sample_file = __dirname + 'create-favicons-cfg.mjs';
+    const pkg_dir = new URL('.', import.meta.url).pathname,
+      cfg_sample_file = process.cwd() + '/create-favicons-cfg.mjs';
 
     if(fs.existsSync(cfg_sample_file)) {
       throw `${cfg_sample_file} già presente`;
     }
 
 
-    let default_params = fs.readFileSync(__dirname + 'src/defaults.mjs', 'UTF8');
+    let default_params = fs.readFileSync(pkg_dir + 'src/defaults.mjs', 'UTF8');
     const start_string = '/*** INIT START ***/',
       end_string = '/*** INIT END ***/';
 
@@ -51,7 +52,10 @@ try {
       'export default params;'
     );
 
-    console.log( chalk.bgGreen.bold( ' ** File di configurazione di esempio generato ** ' ) );
+    printFrame([
+      {string: 'File di configurazione di generato:'},
+      {string: cfg_sample_file},
+    ]);
 
   } else {
 
@@ -95,5 +99,5 @@ try {
 
 
 } catch(err) {
-  console.error(chalk.bgRed(` ${err} `));
+  console.error(chalk.bgRed(`\n ${err} \n`));
 }
