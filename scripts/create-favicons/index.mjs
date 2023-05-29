@@ -43,9 +43,9 @@ try {
 
     fs.writeFileSync(
       cfg_sample_file,
-      'const params = {\n' +
+      'const params = [{\n' +
       default_params +
-      '\n};\n\n' +
+      '\n}];\n\n' +
       'export default params;'
     );
 
@@ -67,7 +67,16 @@ try {
 
       import(path.resolve(params.work_dir, cfg_filename))
         .then((custom_params) => {
-          createFavicons({ ...defaults, ...params, ...custom_params.default });
+
+          if(Array.isArray(custom_params.default)) {
+
+            custom_params.default.forEach(item => {
+              createFavicons({ ...defaults, ...params, ...item });
+            });
+
+          } else {
+            createFavicons({ ...defaults, ...params, ...custom_params.default });
+          }
         });
 
     } else if(fs.existsSync(path.resolve(params.work_dir, defaults.src_img))) {

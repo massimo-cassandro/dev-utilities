@@ -26,12 +26,14 @@ I parametri di default sono elencati in dettaglio nel file `scripts/create-favic
 
 ```javascript
 // file create-favicons-cfg.mjs
-const params = { /* ... */ };
+const params = [{ /* ... */ }];
 
 export default params;
 ```
 
-Utilizzare il comando
+`params` può essere un ogetto o un array. In quest'ultimo caso, ogni elemento dell'array corrisponde ad un diverso set di favicons.
+
+Per creare un file di cfg di esempio nella dir corrente, utilizzare il comando:
 
 ```bash
 npx create-favicons init
