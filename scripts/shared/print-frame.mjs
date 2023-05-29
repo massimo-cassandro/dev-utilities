@@ -1,35 +1,51 @@
 /* eslint-disable no-console */
 import chalk from 'chalk';
 
-export function printFrame(stringsArray, frameColor = 'success') {
+export function printFrame(options) {
 
   /*
     stringsArray = [
-      {string: '__string__', color: 'success', bg: false},
+      {string: '__string__', color: 'green', bg: false, bold: false, underline: false},
       {...}
     ]
   */
 
-  // TODO bold underline ecc...
-
-  const string_defaults = { string: '', color: 'success', bg: false, bold: false, underline: false},
-    colors = {
-      success: ['green', 'bgGreen']
+  const defaults = {
+      strings: [],
+      frameColor: 'green',
+      frametype: 'single'
+    },
+    string_defaults = { string: '', color: 'green', bg: false, bold: false, underline: false},
+    frame_lines = {
+      single: ['┌', '┐', '└', '┘', '┈', '│'],
+      double: ['╔', '╗', '╚', '╝', '═', '║']
     };
 
-  stringsArray = stringsArray.map(item => {return {...string_defaults, ...item }; });
+  options = {...defaults, ...options};
 
-  const total_length = Math.max( ...(stringsArray.map(item => item.string.length)) ) + 2;
+  const frames_elements = frame_lines[options.frametype];
 
-  console.log( chalk[colors[frameColor][0]]( '\n╔' + '═'.repeat(total_length) + '╗') );
+  options.strings = options.strings.map(item => {return {...string_defaults, ...item }; });
 
-  stringsArray.forEach(item => {
-    const color = colors[item.color][item.bg? 1 : 0];
-
-    console.log( chalk[color](
-      '║ ' + item.string  + ' '.repeat(total_length - item.string.length - 2) + ' ║'
-    ));
+  // TODO bold underline ecc...
+  // aggiunta spazi sulle righe `bg`
+  options.strings.forEach(item => {
+    if(/^bg/.test(item.color)) {
+      item.string = ` ${item.string} `;
+    }
   });
 
-  console.log( chalk[colors[frameColor][0]]( '╚' + '═'.repeat(total_length) + '╝\n' ) );
+  const total_length = Math.max( ...(options.strings.map(item => item.string.length)) ) + 2;
+
+  console.log( chalk[options.frameColor]( `\n${frames_elements[0]}` + frames_elements[4].repeat(total_length) + frames_elements[1]) );
+
+  options.strings.forEach(item => {
+    console.log(
+      chalk[options.frameColor](`${frames_elements[5]} `) +
+      chalk[item.color](item.string)  + ' '.repeat(total_length - item.string.length - 2) +
+      chalk[options.frameColor](` ${frames_elements[5]}`)
+    );
+  });
+
+  console.log( chalk[options.frameColor]( frames_elements[2] + frames_elements[4].repeat(total_length) + `${frames_elements[3]}\n` ) );
 }

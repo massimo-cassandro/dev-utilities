@@ -42,3 +42,4 @@
 2023-05-29T13:05:01.999Z |           1.15.3 | fix
 2023-05-29T13:39:40.036Z |           1.15.4 | create-favicons fix
 2023-05-29T14:31:22.411Z |           1.16.0 | create-favicons: opzione `null` per snippet file
+2023-05-29T20:31:40.550Z |           1.16.1 | upd

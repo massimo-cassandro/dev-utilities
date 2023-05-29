@@ -11,6 +11,8 @@ import imagemin from 'imagemin';
 import imageminJpegtran from 'imagemin-jpegtran';
 import imageminPngquant from 'imagemin-pngquant';
 
+import { printFrame } from '../../shared/print-frame.mjs';
+
 
 export function createFavicons(params) {
 
@@ -128,9 +130,17 @@ export function createFavicons(params) {
       );
     }
 
+    printFrame({
+      strings: [
+        {string: '** Creazione favicons completata **', color: 'bgGreen'},
+        {string: ''},
+        {string: 'I file generati sono nella directory:', color: 'green'},
+        {string: output_dir, color: 'yellow'},
+      ],
+      frameColor: 'green',
+      frameType: 'single'
+    });
 
-    console.log( chalk.bgGreen.bold( ' ** Creazione favicons completata ** ' ) );
-    console.log( chalk.green( `\nI file generati sono nella directory\n'${output_dir}'\n` ) );
 
   } catch(err) {
 

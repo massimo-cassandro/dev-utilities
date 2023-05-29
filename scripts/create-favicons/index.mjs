@@ -52,10 +52,14 @@ try {
       'export default params;'
     );
 
-    printFrame([
-      {string: 'File di configurazione di generato:'},
-      {string: cfg_sample_file},
-    ]);
+    printFrame({
+      strings: [
+        {string: 'File di configurazione di generato:', color: 'green'},
+        {string: cfg_sample_file, color: 'bgGreen'},
+      ],
+      frameColor: 'green',
+      frameType: 'double'
+    });
 
   } else {
 
