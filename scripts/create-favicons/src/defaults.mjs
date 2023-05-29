@@ -11,12 +11,13 @@ export const defaults = {
   // sorgente opzionale per immagini piccole (32px)
   small_src_img: null,
 
+  // nome del file snippet senza estensione
+  // se null, lo snippet non viene generato
+  snippet_name: 'favicon',
+
   // linguaggio da utilizzare per lo snippet html
   // html, pug o twig
   snippet_language: 'html',
-
-  // nome del file snippet senza estensione
-  snippet_name: 'favicon',
 
   // path dei file favicon da utilizzare nello snippet
   publicPath: '/',

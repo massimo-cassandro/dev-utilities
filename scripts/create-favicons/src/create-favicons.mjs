@@ -105,26 +105,28 @@ export function createFavicons(params) {
 
 
     // snippet
-    params.snippet_language = params.snippet_language.toLowerCase();
-    const cache_buster = params.add_cache_buster? `?_=${Date.now()}` : '';
+    if(params.snippet_name) {
+      params.snippet_language = params.snippet_language.toLowerCase();
+      const cache_buster = params.add_cache_buster? `?_=${Date.now()}` : '';
 
-    let snippet_content = `<link rel="icon" href="${params.publicPath}favicon.ico${cache_buster}" sizes="any">\n` +
-      `<link rel="icon" href="${params.publicPath}favicon.svg${cache_buster}" type="image/svg+xml">\n` +
-      `<link rel="apple-touch-icon" href="${params.publicPath}apple-touch-icon.png${cache_buster}">\n` +
-      `<link rel="manifest" href="${params.publicPath}manifest.webmanifest${cache_buster}">`;
+      let snippet_content = `<link rel="icon" href="${params.publicPath}favicon.ico${cache_buster}" sizes="any">\n` +
+        `<link rel="icon" href="${params.publicPath}favicon.svg${cache_buster}" type="image/svg+xml">\n` +
+        `<link rel="apple-touch-icon" href="${params.publicPath}apple-touch-icon.png${cache_buster}">\n` +
+        `<link rel="manifest" href="${params.publicPath}manifest.webmanifest${cache_buster}">`;
 
-    if(params.snippet_language === 'twig') {
-      snippet_content = snippet_content.replace(/href="(.*?)"/g, 'href="{{ asset(\'$1\') }}"');
+      if(params.snippet_language === 'twig') {
+        snippet_content = snippet_content.replace(/href="(.*?)"/g, 'href="{{ asset(\'$1\') }}"');
 
-    } else if (params.snippet_language === 'pug') {
-      snippet_content = snippet_content.replace(/<link (.*?)>/g, 'link($1)');
+      } else if (params.snippet_language === 'pug') {
+        snippet_content = snippet_content.replace(/<link (.*?)>/g, 'link($1)');
+      }
+
+
+      fs.writeFileSync(
+        `${output_dir}/${params.snippet_name}.${params.snippet_language === 'twig'? 'html.twig' : params.snippet_language}`,
+        snippet_content
+      );
     }
-
-
-    fs.writeFileSync(
-      `${output_dir}/${params.snippet_name}.${params.snippet_language === 'twig'? 'html.twig' : params.snippet_language}`,
-      snippet_content
-    );
 
 
     console.log( chalk.bgGreen.bold( ' ** Creazione favicons completata ** ' ) );
