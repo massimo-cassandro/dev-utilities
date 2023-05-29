@@ -1,12 +1,12 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "My collection of dev utilities",
   "bin": {
-    "update-version": "./scripts/update-version/index.mjs",
+    "@mc-update-version": "./scripts/update-version/index.mjs",
     "upd@m": "./scripts/upd@m/index.mjs",
     "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs",
-    "create-favicons": "./scripts/create-favicons/index.mjs"
+    "@mc-create-favicons": "./scripts/create-favicons/index.mjs"
   },
   "type": "module",
   "scripts": {
