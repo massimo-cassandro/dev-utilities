@@ -25,18 +25,5 @@ Utilità per lo sviluppo
 * inizializza un progetto, installa i package std, inizializza npm e git, aggiunge script e setup vari nel package.json
 
 ###  create favicons
-* percorso specifico per snippet
-* possibilità che il file src sia un PNG o JPG
-* template per snippet
+* possibilità che il file src sia un PNG o JPG (???)
 
-vedi:
-
-```twig
-{% set favicon_path = 'favicons' ~ (app.environment != 'prod'? '-test' : '') ~ '/' %}
-
-<link rel="icon" href="{{ asset(favicon_path ~ 'favicon.ico') }}?_1685367770751=" sizes="any">
-<link rel="icon" href="{{ asset(favicon_path ~ 'favicon.svg') }}?_1685367770751" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ asset(favicon_path ~ 'apple-touch-icon.png') }}?_1685367770751">
-<link rel="manifest" href="{{ asset(favicon_path ~ 'manifest.webmanifest') }}?_1685367770751">
-
-```

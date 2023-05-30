@@ -1,6 +1,6 @@
 # Create favicons
 
-Crea i file favicons come descritto in [How to Favicon in 2023 ](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs).
+Crea i file favicons come descritto in [How to Favicon in 2023](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs).
 
 Utilizzo:
 
@@ -8,8 +8,8 @@ Utilizzo:
 npx create-favicons [--dir=./path/to/dir]
 ```
 
-Il parametro opzionale `--dir` permette di specificare la directory in cui lo script deve agire. 
-In sua assenza lo script agisce nella directory corrente.
+Lo script agisce normalmente nella directory corrente, ma, utilizzando il parametro opzionale `--dir`, 
+è possibile specificare una directory alternativa (percorso relativo alla dir di esecuzione). 
 
 Lo script in prima battuta cerca nella dir di lavoro il file `create-favicons-cfg.mjs` che contiene un oggetto
 con tutti i parametri necessari (vedi di seguito).
@@ -22,7 +22,8 @@ Il formato migliore per i file sorgenti è SVG, o in alternativa PNG.
 
 In assenza di entrambi i file viene restituito un errore.
 
-I parametri di default sono elencati in dettaglio nel file `scripts/create-favicons/src/defaults.mjs`, e possono essere personalizzati in `create-favicons-cfg.mjs`: 
+I parametri di default sono elencati in dettaglio nel file `scripts/create-favicons/src/defaults.mjs`, 
+e possono essere personalizzati nel file di configurazione, che deve avere questa forma: 
 
 ```javascript
 // file create-favicons-cfg.mjs
@@ -33,29 +34,32 @@ export default params;
 
 `params` può essere un ogetto o un array. In quest'ultimo caso, ogni elemento dell'array corrisponde ad un diverso set di favicons.
 
-Per creare un file di cfg di esempio nella dir corrente, utilizzare il comando:
+Per creare un file di cfg di esempio **nella directory corrente** (con tutti i valori di default e la loro descrizione), 
+utilizzare il comando:
 
 ```bash
 npx create-favicons init
 ```
 
-Per creare un file di cfg base nella dir corrente.
-
-
 ## Utilizzo da remoto
 
-I comandi possonoi essere eseguti anche senza installare preventivamente il package:
+I comandi possono essere eseguti anche senza installare preventivamente il package:
 
 ```
 npx --package=@massimo-cassandro/dev-utilities create-favicons init
-npx --package=@massimo-cassandro/dev-utilities create-favicons --dir=...
+npx --package=@massimo-cassandro/dev-utilities create-favicons [--dir=...]
 
 ```
+
+## Esecuzione
 
 Lo script produce le varie immagini png ed svg, il file `manifest.webmanifest` e uno snippet html (o nel linguaggio indicato nel parametro `snippet_language`).
 Tutte le immagini vengono ottimizzati con [SVGO](https://github.com/svg/svgo) e [imagemin](https://github.com/imagemin/imagemin).
 
 Tutti file vengono salvati nella dir indicata in `output_dir` (default: directory corrente).
+
+Opzionalmente il file snippet può essere salvato in una directory differente (`snippet_path`) o si può decidere di non crearlo, 
+impostando il valore `snippet_name` a `null`.
 
 Nel file di configurazione è anche possibile impostare il parametro `webmanifest_extra`, che permette di aggiungere voci aggiuntive al file *manifest*.
 Per ulteriori info: <https://developer.mozilla.org/en-US/docs/Web/Manifest>

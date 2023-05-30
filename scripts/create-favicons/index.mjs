@@ -46,6 +46,7 @@ try {
 
     fs.writeFileSync(
       cfg_sample_file,
+      '// file di configurazione per `create-favicons`.\n// I valori indicati sono quelli di default.\n\n' +
       'const params = [{\n' +
       default_params +
       '\n}];\n\n' +

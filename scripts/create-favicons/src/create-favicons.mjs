@@ -107,36 +107,52 @@ export function createFavicons(params) {
 
 
     // snippet
+    const snippet_path = params.snippet_path? path.resolve(params.work_dir, params.snippet_path) : output_dir;
+
     if(params.snippet_name) {
+
+      if (!fs.existsSync(snippet_path)){
+        fs.mkdirSync(snippet_path);
+      }
+
       params.snippet_language = params.snippet_language.toLowerCase();
-      const cache_buster = params.add_cache_buster? `?_=${Date.now()}` : '';
 
-      let snippet_content = `<link rel="icon" href="${params.publicPath}favicon.ico${cache_buster}" sizes="any">\n` +
-        `<link rel="icon" href="${params.publicPath}favicon.svg${cache_buster}" type="image/svg+xml">\n` +
-        `<link rel="apple-touch-icon" href="${params.publicPath}apple-touch-icon.png${cache_buster}">\n` +
-        `<link rel="manifest" href="${params.publicPath}manifest.webmanifest${cache_buster}">`;
+      const cache_buster = params.add_cache_buster? `?_=${Date.now()}` : '',
+        create_href = nome_file => params.href_template.replace('%_file_name_%', nome_file)
+          .replace('%_cache_buster_%', cache_buster);
 
-      if(params.snippet_language === 'twig') {
-        snippet_content = snippet_content.replace(/href="(.*?)"/g, 'href="{{ asset(\'$1\') }}"');
 
-      } else if (params.snippet_language === 'pug') {
+      let snippet_content = `<link rel="icon" href="${create_href('favicon.ico')}" sizes="any">\n` +
+        `<link rel="icon" href="${create_href('favicon.svg')}" type="image/svg+xml">\n` +
+        `<link rel="apple-touch-icon" href="${create_href('apple-touch-icon.png')}">\n` +
+        `<link rel="manifest" href="${create_href('manifest.webmanifest')}">`;
+
+      if (params.snippet_language === 'pug') {
         snippet_content = snippet_content.replace(/<link (.*?)>/g, 'link($1)');
       }
 
+      snippet_content = params.snippet_template.replace('%_link_tags_%', snippet_content);
 
       fs.writeFileSync(
-        `${output_dir}/${params.snippet_name}.${params.snippet_language === 'twig'? 'html.twig' : params.snippet_language}`,
+        `${snippet_path}/${params.snippet_name}`,
         snippet_content
       );
     }
 
+    // print result
     printFrame({
       strings: [
         {string: '** Creazione favicons completata **', color: 'bgGreen'},
         {string: ''},
         {string: 'I file generati sono nella directory:', color: 'green'},
         {string: output_dir, color: 'yellow'},
-      ],
+      ].concat((snippet_path === output_dir && params.snippet_name)? [] :
+        [
+          {string: ''},
+          {string: `Il file snippet '${params.snippet_name}' è stato salvato nella directory:`, color: 'green'},
+          {string: snippet_path, color: 'yellow'},
+        ]
+      ),
       frameColor: 'green',
       frameType: 'single'
     });
