@@ -140,19 +140,30 @@ export function createFavicons(params) {
     }
 
     // print result
+    let extra_strings = [];
+
+    if(snippet_path !== output_dir && params.snippet_name !== null) {
+      extra_strings = [
+        {string: ''},
+        {string: `Il file snippet '${params.snippet_name}' è stato salvato nella directory:`, color: 'green'},
+        {string: snippet_path, color: 'yellow'},
+      ];
+
+    } else if(params.snippet_name === null) {
+      extra_strings = [
+        {string: ''},
+        {string: 'Il file snippet non è stato generato', color: 'magentaBright'},
+      ];
+    }
+
     printFrame({
       strings: [
         {string: '** Creazione favicons completata **', color: 'bgGreen'},
         {string: ''},
         {string: 'I file generati sono nella directory:', color: 'green'},
         {string: output_dir, color: 'yellow'},
-      ].concat((snippet_path === output_dir && params.snippet_name)? [] :
-        [
-          {string: ''},
-          {string: `Il file snippet '${params.snippet_name}' è stato salvato nella directory:`, color: 'green'},
-          {string: snippet_path, color: 'yellow'},
-        ]
-      ),
+        ...extra_strings
+      ],
       frameColor: 'green',
       frameType: 'single'
     });
