@@ -16,8 +16,8 @@ export const defaults = {
   output_dir: 'favicons-output',
 
   // chiavi aggiuntive per webmanifest, normalmente non necessarie per il browser
-  //esempio:
   // vedi https://developer.mozilla.org/en-US/docs/Web/Manifest
+  // esempio:
   // webmanifest_extra: {
   //   name: "my Application",
   //   short_name: "my app",
@@ -54,7 +54,7 @@ export const defaults = {
   // e la stringa '%_cache_buster_%' (se attivata)', che conterrà `?_=xxxx`, dove
   // 'xxxx' rappresenta il timestamp generato per annullare la cache.
   // Va scritto tenendo conto del linguaggio utilizzato.
-  href_template: '%_file_name_%%_cache_buster_%',
+  href_template: '/%_file_name_%%_cache_buster_%',
 
   // se true aggiunge allo snippet una query string per ovviare ad eventuali
   // problemi di caching del browser
