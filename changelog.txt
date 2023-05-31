@@ -46,3 +46,4 @@
 2023-05-30T09:17:02.151Z |           1.16.2 | Create-favicons: personalizzazione parametri output
 2023-05-30T10:20:45.158Z |           1.16.3 | create-favicons: defaults update
 2023-05-30T10:40:19.709Z |           1.16.4 | create-favicons: fix messaggio finale
+2023-05-31T17:45:07.365Z |           1.17.0 | layout-tools

@@ -1,0 +1,39 @@
+.lt-img-info-wrapper {
+  position: relative;
+  display: inline-block;
+  min-height: 1.2rem;
+  padding: 6px;
+  margin: 2px;
+  font-size: small;
+  color: var(--lt-color);
+  background: var(--lt-notice);
+  border: 1px var(--lt-color) solid;
+  border-radius: 4px;
+  box-shadow: 0 0 4px #000;
+
+  summary {
+    font-size: 110%;
+    white-space: nowrap;
+  }
+
+  &[open] {
+    background: var(--lt-bg);
+  }
+
+  table {
+    width: 100%;
+    border-top: 1px solid var(--lt-color);
+    th, td {
+      padding: 2px 4px;
+      text-align: left;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    th {
+      font-weight: 700;
+    }
+    tr:not(:last-child) {
+      border-bottom: 1px dotted var(--lt-color);
+    }
+  }
+}

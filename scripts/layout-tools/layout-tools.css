@@ -1,0 +1,9 @@
+/*
+@import './scss/colori';
+@import './scss/ui';
+@import './scss/imgs-info';
+*/
+
+@import url('./scss/colori.css');
+@import url('./scss/ui.css');
+@import url('./scss/imgs-info.css');

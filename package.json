@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.16.4",
+  "version": "1.17.0",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
@@ -10,6 +10,8 @@
   },
   "type": "module",
   "scripts": {
+    "layout-tools rollup": "npx rollup --config ./scripts/layout-tools/rollup.config.mjs --watch",
+    "layout-tools postcss": "npx postcss ./scripts/layout-tools/layout-tools.css --output ./dist/layout-tools.css --verbose --config ./scripts/layout-tools/ --watch",
     "update-version": "node ./scripts/update-version/index.mjs",
     "upd@m": "node ./scripts/upd@m/index.mjs",
     "npm-publish": "npm publish"
@@ -41,10 +43,11 @@
   },
   "files": [
     "scripts/**/*",
-    "docs/**/*"
+    "docs/**/*",
+    "dist/**/*"
   ],
   "engines": {
-    "node": ">= 16.17.0",
+    "node": ">= 18.0.0",
     "npm": ">= 9.6.0"
   },
   "dependencies": {
@@ -59,6 +62,19 @@
     "to-ico": "^1.1.5"
   },
   "devDependencies": {
-    "@massimo-cassandro/linters-config": "^1.4.0"
+    "@massimo-cassandro/linters-config": "^1.4.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "postcss-advanced-variables": "^3.0.1",
+    "postcss-banner": "^4.0.1",
+    "postcss-cli": "^10.1.0",
+    "postcss-csso": "^6.0.1",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "postcss-scss": "^4.0.6",
+    "rollup": "^3.23.0"
   }
 }
