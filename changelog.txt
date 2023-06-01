@@ -47,3 +47,4 @@
 2023-05-30T10:20:45.158Z |           1.16.3 | create-favicons: defaults update
 2023-05-30T10:40:19.709Z |           1.16.4 | create-favicons: fix messaggio finale
 2023-05-31T17:45:07.365Z |           1.17.0 | layout-tools
+2023-06-01T08:13:25.815Z |           1.17.1 | create-favicons: rimozione homedir dai path presenti nei messaggi

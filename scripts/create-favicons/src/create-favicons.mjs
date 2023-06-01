@@ -12,6 +12,7 @@ import imageminJpegtran from 'imagemin-jpegtran';
 import imageminPngquant from 'imagemin-pngquant';
 
 import { printFrame } from '../../shared/print-frame.mjs';
+import { remove_homedir } from '../../shared/remove-homedir.mjs';
 
 
 export function createFavicons(params) {
@@ -146,7 +147,7 @@ export function createFavicons(params) {
       extra_strings = [
         {string: ''},
         {string: `Il file snippet '${params.snippet_name}' è stato salvato nella directory:`, color: 'green'},
-        {string: snippet_path, color: 'yellow'},
+        {string: remove_homedir(snippet_path), color: 'yellow'},
       ];
 
     } else if(params.snippet_name === null) {
@@ -156,12 +157,13 @@ export function createFavicons(params) {
       ];
     }
 
+
     printFrame({
       strings: [
         {string: '** Creazione favicons completata **', color: 'bgGreen'},
         {string: ''},
         {string: 'I file generati sono nella directory:', color: 'green'},
-        {string: output_dir, color: 'yellow'},
+        {string: remove_homedir(output_dir), color: 'yellow'},
         ...extra_strings
       ],
       frameColor: 'green',

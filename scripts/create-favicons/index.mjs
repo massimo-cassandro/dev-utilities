@@ -13,6 +13,7 @@ import { URL } from 'url';
 
 import chalk from 'chalk';
 import { printFrame } from '../shared/print-frame.mjs';
+import { remove_homedir } from '../shared/remove-homedir.mjs';
 
 import { createFavicons } from './src/create-favicons.mjs';
 import { defaults } from './src/defaults.mjs';
@@ -57,7 +58,7 @@ try {
     printFrame({
       strings: [
         {string: 'File di configurazione di generato:', color: 'green'},
-        {string: cfg_sample_file, color: 'bgGreen'},
+        {string: remove_homedir(cfg_sample_file), color: 'bgGreen'},
       ],
       frameColor: 'green',
       frameType: 'double'
