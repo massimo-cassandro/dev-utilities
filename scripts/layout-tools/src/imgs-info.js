@@ -5,7 +5,7 @@ export default function () {
 
   //ui
   lt.content_wrapper.insertAdjacentHTML('beforeend',
-    '<div><label><input type="checkbox" class="lt-imgs-info-trigger">Imgs info</label</div>'
+    '<div><label><input type="checkbox" id="lt-imgs-info-trigger" class="lt-imgs-info-trigger">Imgs info</label</div>'
   );
 
   let imgs = document.getElementsByTagName('img');
