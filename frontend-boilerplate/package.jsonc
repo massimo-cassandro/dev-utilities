@@ -47,6 +47,7 @@
     "*** INST gulp (std icone)": "npm i --save-dev gulp@latest gulp-dom gulp-rename gulp-replace gulp-svgmin gulp-svgstore gulp-jsbeautifier gulp-concat gulp-flatmap gulp-inject-string",
     "*** INST gulp-wrap (icone react)": "npm i --save-dev gulp-wrap",
     "*** INST prismjs": "npm i --save-dev prismjs",
+    "*** React lighter": "npm uninstall @testing-library/jest-dom @testing-library/react @testing-library/user-event web-vitals",
 
     "rollup": "npx rollup --config ./config/rollup.config.mjs --watch",
     "sass+postcss": "npm run sass-cli & npm run postcss-cli",

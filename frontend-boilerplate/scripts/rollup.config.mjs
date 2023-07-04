@@ -103,7 +103,11 @@ export default config;
 export default [
   {
     input: 'input.js',
-    plugins: [ ... ],
+    plugins: [
+      node_resolve(),
+      // commonjs(),
+      terser({ compress: { passes: 2 } }),
+    ],
     output: [
       {
         file: 'output.min.js',
