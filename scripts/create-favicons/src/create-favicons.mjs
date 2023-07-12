@@ -50,7 +50,7 @@ export function createFavicons(params) {
             plugins: [
               imageminJpegtran(),
               imageminPngquant({
-                quality: [0.3, 0.6],
+                quality: params.imagemin_png_quality,
                 dithering: false,
                 strip: true,
                 verbose: true

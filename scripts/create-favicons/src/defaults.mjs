@@ -15,6 +15,9 @@ export const defaults = {
   // se la dir non esiste, viene creata
   output_dir: 'favicons-output',
 
+
+  // WEBMANIFEST
+  //****************************************************************************
   // chiavi aggiuntive per webmanifest, normalmente non necessarie per il browser
   // vedi https://developer.mozilla.org/en-US/docs/Web/Manifest
   // esempio:
@@ -58,9 +61,19 @@ export const defaults = {
 
   // se true aggiunge allo snippet una query string per ovviare ad eventuali
   // problemi di caching del browser
-  add_cache_buster: false
+  add_cache_buster: false,
 
+
+  // IMAGEMIN PARAMETERS
   //****************************************************************************
+  // parametri per i file PNG
+  // vedi https://www.npmjs.com/package/imagemin-pngquant
+  // Instructs pngquant to use the least amount of colors required to meet or
+  // exceed the max quality. If conversion results in quality below the min quality
+  // the image won't be saved.
+  // Min and max are numbers in range 0 (worst) to 1 (perfect), similar to JPEG.
+  imagemin_png_quality: [0.3, 0.6]
+
 
   /*** INIT END ***/
 
