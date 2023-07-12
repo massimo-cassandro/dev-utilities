@@ -50,3 +50,4 @@
 2023-06-01T08:13:25.815Z |           1.17.1 | create-favicons: rimozione homedir dai path presenti nei messaggi
 2023-06-14T13:50:33.895Z |           1.17.2 | layout-tools fix
 2023-07-12T08:48:16.358Z |           1.18.0 | create-Favicons: parametro per la personalizzazione della qualità dei file PNG
+2023-07-12T14:59:09.227Z |           1.18.1 | docs fix

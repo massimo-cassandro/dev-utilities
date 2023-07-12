@@ -11,14 +11,15 @@ Utilità per lo sviluppo
 
 
 ## TODO
+* opzione init per creare il file cfg (condivisa con tutti gli script che ne fanno uso)
 
 ### Update Version
-* opzione init per creare il file cfg (condivisa con tutti gli script che ne fanno uso)
 * opzione per non aggiornare html e twig ma solo package.json, anche se configurati
 * https://github.com/natemoo-re/clack
 
 ### vscode custom properties list
 * icon list
+* migliorare gestione percorsi inseriti nel cfg U(ora sono considerati sempre dalla root del progetto, ma genera equivoci)
 * jsonc support: https://github.com/microsoft/node-jsonc-parser https://www.npmjs.com/package/comment-json
 
 ### setup init

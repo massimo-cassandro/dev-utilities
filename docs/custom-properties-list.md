@@ -28,7 +28,7 @@ Opzionalmente produce anche uno snippet con un elenco delle icone utilizzate nel
 Utilizzo:
 
 ```bash
-npx css-properties-list --config=./dev-utilities.config.mjs
+npx vscode-css-properties-list --config=./dev-utilities.config.mjs
 ```
 
 In cui  `--config=<path>` indica il percorso al file `.mjs` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `cssPropsList`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.mjs`.
