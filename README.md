@@ -18,6 +18,7 @@ Utilità per lo sviluppo
 * https://github.com/natemoo-re/clack
 
 ### vscode custom properties list
+* rivedere completamente
 * icon list
 * migliorare gestione percorsi inseriti nel cfg U(ora sono considerati sempre dalla root del progetto, ma genera equivoci)
 * jsonc support: https://github.com/microsoft/node-jsonc-parser https://www.npmjs.com/package/comment-json

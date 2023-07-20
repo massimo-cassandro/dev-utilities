@@ -1,4 +1,4 @@
-# EditorConfig is awesome: https://EditorConfig.org
+# https://editorconfig.org
 
 # top-most EditorConfig file
 root = true
@@ -14,3 +14,6 @@ trim_trailing_whitespace = true
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 4

@@ -16,10 +16,10 @@
     "url": "git+https://github.com/massimo-cassandro/xxxxxx.git#main"
   },
   "bugs": {
-    "url": "https://github.com/xxxx/issues"
+    "url": "https://github.com/massimo-cassandro/xxxxxx/issues"
   },
 
-  // "homepage": "https://github.com/xxxx#readme",
+  // "homepage": "https://github.com/massimo-cassandro/xxxxxx#readme",
   "keywords": [],
   "scripts": {
     "*** INST BASIC ***": "npm i @massimo-cassandro/dev-utilities @massimo-cassandro/linters-config --save-dev",
@@ -28,6 +28,7 @@
     "*** INST auto-datatables-bs5": "npm i --save @massimo-cassandro/auto-datatables-bs5",
     "*** INST json-table": "npm i --save @massimo-cassandro/json-table",
     "*** INST js-file-uploader": "npm i --save @massimo-cassandro/js-file-uploader",
+    "*** INST autocomplete": "npm i --save @massimo-cassandro/autocomplete",
     "*** INST scss-utilities": "npm i --save @massimo-cassandro/scss-utilities",
     "*** INST ckeditor-utilities": "npm i --save @massimo-cassandro/ckeditor-utilities",
     "*** INST cookie-consent": "npm i --save @massimo-cassandro/cookie-consent",
