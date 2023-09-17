@@ -67,7 +67,7 @@
     "upd@m": "npx upd@m",
     "npm update": "npm update",
     "npm publish": "npm publish",
-    "local test server": "python3 -m http.server --directory build",
+    "local test server": "python3 -m http.server 8000 --directory build",
     "php server": "php -S localhost:8000",
 
     "webpack PROD": "NODE_ENV=production webpack --config ./config/webpack-config/webpack.prod.js"

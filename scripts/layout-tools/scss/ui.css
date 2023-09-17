@@ -20,7 +20,7 @@
   background: transparent;
   transition: opacity .3s linear;
 
-  .lt-inner-wrapper{
+  .lt-inner-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

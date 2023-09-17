@@ -1,12 +1,13 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./scripts/update-version/index.mjs",
     "upd@m": "./scripts/upd@m/index.mjs",
     "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs",
-    "create-favicons": "./scripts/create-favicons/index.mjs"
+    "create-favicons": "./scripts/create-favicons/index.mjs",
+    "dev-inst": "./scripts/dev-inst/index.mjs"
   },
   "type": "module",
   "scripts": {
@@ -44,13 +45,15 @@
   "files": [
     "scripts/**/*",
     "docs/**/*",
-    "dist/**/*"
+    "dist/**/*",
+    "templates/**/*"
   ],
   "engines": {
     "node": ">= 18.0.0",
     "npm": ">= 9.0.0"
   },
   "dependencies": {
+    "@clack/prompts": "^0.6.3",
     "chalk": "^5.1.2",
     "clipboardy": "^3.0.0",
     "imagemin": "^8.0.1",

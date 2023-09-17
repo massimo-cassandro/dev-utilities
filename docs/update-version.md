@@ -16,6 +16,12 @@ Utilizzo:
 npx update-version --config=./dev-utilities.config.mjs
 ```
 
+Il comando può essere eseguito anche senza installare il package (utile specialmente per il mo setup):
+
+```
+npx --package=@massimo-cassandro/dev-utilities update-version
+```
+
 In cui  `--config=<path>` indica il percorso al file `.mjs` di configurazione generale (vedi sotto). Il file deve esportare un oggetto con la proprietà `updateVersion`. Se il path non viene specificato, il percorso di default è `./dev-utilities.config.mjs`.
 
 La proprietà `updateVersion` può contenere:
@@ -64,7 +70,7 @@ Tutti parametri sono opzionali
 Opzionalmente, e per compatibilità con le versioni precedenti, alcuni parametri possono essere definiti direttamente via CLI:
 
 ```bash
-node ./node_modules/@massimo-cassandro/dev-utilities/scripts/update-version.mjs \ 
+npx update-version \ 
   --html-files=path/to/html_file1.html,path/to/html_file2.html,... \
   --twig-vars-file=path/to/file/config.html.twig \
   --default-descr=text \

@@ -43,7 +43,7 @@ npx create-favicons init
 
 ## Utilizzo da remoto
 
-I comandi possono essere eseguti anche senza installare preventivamente il package:
+I comandi possono essere eseguiti anche senza installare preventivamente il package:
 
 ```
 npx --package=@massimo-cassandro/dev-utilities create-favicons init

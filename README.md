@@ -7,7 +7,24 @@ Utilità per lo sviluppo
 * [Update packages](docs/update-packages.md)
 * [Custom properties list for VSCode](docs/custom-properties-list.md)
 * [Create Favicons](docs/create-favicons.md)
+* [Dev installer](docs/dev-inst.md)
 * [Esempi di utilizzo](docs/esempi-utilizzo.md)
+
+## Layout-tools
+
+Inserire nella pagina:
+
+```html
+<script src="/path/to/layout-tools-min.js" data-fw="__fw__"></script>
+```
+
+`__fw__` corrisponde al framework utilizzato e può essere:
+
+* `bs5`: Bootstrap 5 (default)
+* `bs4`: Bootstrap 4
+* `bs3`: Bootstrap 3
+* `foundation6`: Foundation 6
+
 
 
 ## TODO

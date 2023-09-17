@@ -35,13 +35,23 @@ export const defaults = {
   //****************************************************************************
 
   // nome del file snippet, compresa l'estensione
-  // se null, lo snippet non viene generato
+  // se questo parametro è null e anche `snippet_target_file` lo è, lo snippet non viene generato
   snippet_name: 'favicon.html',
 
   // path (relativo a questo file) in cui salvare lo snippet
   // se null, viene utilizzato lo stesso percorso indicato in `output_dir`
   // se la dir non esiste, viene creata
   snippet_path: null,
+
+  // path del file in cui scrivere le righe dello snippet
+  // questa impostazione è alternativa alle due precedenti e, se presente, queste
+  // ultime vengono ignorate.
+  // Per utilizzarla, le va assegnato il percorso del file (già esistente) nel quale
+  // scrivere le righe delle snippet.
+  // Il file deve contenere dei segnaposti per contrassegnare lo spazio entro il quale
+  // scrivere lo snippets
+  // <!-- favicon-snippet-start --><!-- favicon-snippet-end -->
+  snippet_target_file: null,
 
   // linguaggio da utilizzare per la sintassi dello snippet html
   // html o pug

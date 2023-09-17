@@ -107,12 +107,12 @@ export function createFavicons(params) {
     fs.writeFileSync(`${output_dir}/manifest.webmanifest`, JSON.stringify(manifest, null, ' '));
 
 
-    // snippet
     const snippet_path = params.snippet_path? path.resolve(params.work_dir, params.snippet_path) : output_dir;
 
-    if(params.snippet_name) {
+    // snippet
+    if(params.snippet_name || params.snippet_target_file) {
 
-      if (!fs.existsSync(snippet_path)){
+      if (!params.snippet_target_file && !fs.existsSync(snippet_path)){
         fs.mkdirSync(snippet_path);
       }
 
@@ -134,10 +134,32 @@ export function createFavicons(params) {
 
       snippet_content = params.snippet_template.replace('%_link_tags_%', snippet_content);
 
-      fs.writeFileSync(
-        `${snippet_path}/${params.snippet_name}`,
-        snippet_content
-      );
+      if (params.snippet_target_file) {
+
+        params.snippet_target_file = path.resolve(params.work_dir, params.snippet_target_file);
+
+        if (fs.existsSync(params.snippet_target_file)) {
+          const targetFileContent = fs.readFileSync(path.resolve(params.snippet_target_file), 'utf8'),
+            regexp = /<!-- ?favicon-snippet-start ?-->(.*?)<!-- ?favicon-snippet-end ?-->/mis;
+
+          fs.writeFileSync(params.snippet_target_file,
+            targetFileContent.replace(regexp,
+              `<!-- favicon-snippet-start -->\n${snippet_content}\n<!-- favicon-snippet-end -->`
+            )
+          );
+
+        } else {
+          throw `Il file '${params.snippet_target_file}' non esiste`;
+        }
+
+      } else {
+
+        fs.writeFileSync(
+          `${snippet_path}/${params.snippet_name}`,
+          snippet_content
+        );
+
+      }
     }
 
     // print result
