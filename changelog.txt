@@ -53,3 +53,4 @@
 2023-07-12T14:59:09.227Z |           1.18.1 | docs fix
 2023-09-17T15:14:01.301Z |           1.19.0 | favicon: new `snippet_target_file` parameter
 2023-11-28T16:11:16.637Z |           1.20.0 | Layout tools position
+2023-11-28T16:25:28.443Z |           1.20.1 | fix
