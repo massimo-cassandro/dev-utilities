@@ -23,7 +23,7 @@ export default function () {
     };
 
 
-  document.body.insertAdjacentHTML('beforeend', '<div id="' + wrapper_id + '" class="lt-collapsed"></div>');
+  document.body.insertAdjacentHTML('beforeend', `<div id="${wrapper_id}" class="lt-wrapper lt-collapsed ${lt.position}"></div>`);
   lt.wrapper = document.getElementById(wrapper_id);
 
   lt.wrapper.innerHTML = `<div class="lt-inner-wrapper">

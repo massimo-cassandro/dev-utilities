@@ -1,6 +1,10 @@
 import inquirer from 'inquirer';
 import { params } from './params.mjs';
 
+
+// TODO aggiornare inquirer
+
+// https://github.com/SBoudrias/Inquirer.js#inquirer
 export async function chooser() {
 
   let choices_array;

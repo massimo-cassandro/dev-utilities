@@ -5,7 +5,6 @@
 
 // shell: npm info YOUR_PACKAGE version
 import * as fs from 'fs';
-// import inquirer from 'inquirer';
 import chalk from 'chalk';
 import clipboard from 'clipboardy';
 

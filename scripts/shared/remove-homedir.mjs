@@ -1,4 +1,4 @@
-// rimuove la porzione homedir da un path e la sotituisce con '~'
+// rimuove la porzione homedir da un path e la sostituisce con '~'
 
 import {homedir} from 'os';
 
