@@ -20,7 +20,7 @@ export default function () {
   lt.currentDir = lt.currentDir.substring(0, lt.currentDir.lastIndexOf('/'));
 
   lt.framework = (currentScript.dataset.fw || 'bs5').replace(/^bootstrap(\d+)/, 'bs$1');
-  lt.position = currentScript.dataset.position || 'top-left'
+  lt.position = (currentScript.dataset.position || 'top left').split(/ |,|-/).map(i => `lt-${i}`).join(' ');
 
   lt.css = currentScript.dataset.css || lt.currentDir + '/layout-tools.css';
 

@@ -1,20 +1,20 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.20.1",
+  "version": "1.20.2",
   "description": "My collection of dev utilities",
   "bin": {
-    "update-version": "./scripts/update-version/index.mjs",
-    "upd@m": "./scripts/upd@m/index.mjs",
-    "vscode-css-properties-list": "./scripts/vscode-css-properties-list/index.mjs",
-    "create-favicons": "./scripts/create-favicons/index.mjs",
-    "dev-inst": "./scripts/dev-inst/index.mjs"
+    "update-version": "./src/update-version/index.mjs",
+    "upd@m": "./src/upd@m/index.mjs",
+    "vscode-css-properties-list": "./src/vscode-css-properties-list/index.mjs",
+    "create-favicons": "./src/create-favicons/index.mjs",
+    "dev-inst": "./src/dev-inst/index.mjs"
   },
   "type": "module",
   "scripts": {
-    "layout-tools rollup": "npx rollup --config ./scripts/layout-tools/rollup.config.mjs --watch",
-    "layout-tools postcss": "npx postcss ./scripts/layout-tools/layout-tools.css --output ./dist/layout-tools.css --verbose --config ./scripts/layout-tools/ --watch",
-    "update-version": "node ./scripts/update-version/index.mjs",
-    "upd@m": "node ./scripts/upd@m/index.mjs",
+    "layout-tools rollup": "npx rollup --config ./src/layout-tools/rollup.config.mjs --watch",
+    "layout-tools postcss": "npx postcss ./src/layout-tools/layout-tools.css --output ./dist/layout-tools.css --verbose --config ./src/layout-tools/ --watch",
+    "update-version": "node ./src/update-version/index.mjs",
+    "upd@m": "node ./src/upd@m/index.mjs",
     "npm-publish": "npm publish"
   },
   "publishConfig": {
@@ -43,7 +43,7 @@
     "extends": "@massimo-cassandro/linters-config/stylelintrc.js"
   },
   "files": [
-    "scripts/**/*",
+    "src/**/*",
     "docs/**/*",
     "dist/**/*",
     "dev-files-templates/**/*"

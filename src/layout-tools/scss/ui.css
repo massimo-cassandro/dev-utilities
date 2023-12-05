@@ -20,28 +20,6 @@
   background: transparent;
   transition: opacity .3s linear;
 
-  /* default */
-  &, &.top-left {
-    top: 4px;
-    left: 0;
-  }
-  &.top-right {
-    top: 4px;
-    right: 0;
-    left: auto;
-  }
-  &.bottom-left {
-    top: auto;
-    bottom: 4px;
-    left: 0;
-  }
-  &.bottom-right {
-    top: auto;
-    right: 0;
-    bottom: 4px;
-    left: auto;
-  }
-
   dl {
     margin: 0;
     dt {
@@ -100,9 +78,7 @@
 }
 .lt-inner-wrapper {
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
-  align-items: flex-start;
   justify-content: flex-start;
 }
 
@@ -117,7 +93,7 @@
   overflow: hidden;
   background: var(--lt-bg);
   border: 1px solid var(--lt-color);
-  border-bottom-right-radius: 8px;
+
 
   > div {
     width: 100%;
@@ -131,12 +107,7 @@
 
 .lt-content, .lt-brkpt {
   border-color: var(--lt-color);
-  border-style: solid solid solid none;
   border-width: 2px;
-
-  .top-right &, .bottom-right & {
-    border-style: solid;
-  }
 }
 
 .lt-content > div,
@@ -150,22 +121,69 @@
   align-items: center;
   justify-content: center;
   height: 1.5em;
-  padding: 1px 6px 1px 3px;
   font-size: small;
 
   font-weight: 700;
   color: var(--lt-color);
   cursor: pointer;
   background: var(--lt-bg);
-  border-radius: 0 1em 1em 0; /* top-left */
-
-  .top-right &, .bottom-right & {
-    padding: 1px 12px 1px 6px;
-    border-radius: 1em 0 0 1em;
-  }
 
   &:hover {
     color: var(--lt-bg);
     background: var(--lt-color);
+  }
+}
+
+
+/* posizionamento .lt-wrapper */
+.lt-top { /* default */
+  top: 4px;
+
+  .lt-inner-wrapper {
+    align-items: flex-start;
+  }
+}
+.lt-left { /* default */
+  left: 0;
+
+  .lt-brkpt {
+    padding: 1px 6px 1px 3px;
+    border-radius: 0 1em 1em 0;
+  }
+
+  .lt-inner-wrapper {
+    flex-direction: row;
+  }
+
+  .lt-content, & .lt-brkpt {
+    border-style: solid solid solid none;
+  }
+}
+
+.lt-bottom {
+  bottom: 20px;
+
+  .lt-inner-wrapper {
+    align-items: flex-end;
+  }
+}
+
+.lt-right {
+  right: 0;
+
+  .lt-brkpt {
+    padding: 1px 12px 1px 6px;
+    border-radius: 1em 0 0 1em;
+  }
+
+  .lt-inner-wrapper {
+    flex-direction: row-reverse;
+  }
+
+  .lt-content, & .lt-brkpt {
+    border-style: solid none solid solid;
+  }
+  .lt-content {
+    padding-right: 20px;
   }
 }

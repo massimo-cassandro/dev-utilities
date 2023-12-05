@@ -174,16 +174,17 @@ const packages = [
   },
 
 ].concat([
-  'js-utilities',
-  'modal-alert',
   'auto-datatables-bs5',
-  'json-table',
-  'js-file-uploader',
   'autocomplete',
-  'scss-utilities',
   'ckeditor-utilities',
   'cookie-consent',
-  'sharing-links'
+  'js-file-uploader',
+  'js-utilities',
+  'json-table',
+  'modal-alert',
+  'scss-utilities',
+  'sharing-links',
+  'unsplash-page'
 ].map(item =>{
   return {
     label: `@massimo-cassandro/${item}`,

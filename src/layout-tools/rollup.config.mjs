@@ -12,7 +12,7 @@ const terserOptions = {
 };
 
 export default {
-  input: './scripts/layout-tools/layout-tools.js',
+  input: './src/layout-tools/layout-tools.js',
   plugins: [node_resolve(), terser(terserOptions), json()],
 
   output: [
