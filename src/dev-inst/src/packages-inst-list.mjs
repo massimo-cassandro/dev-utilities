@@ -6,7 +6,7 @@ export const defaultPackageValues = {
   merge: [] // altri record da includere (lista di id)
 };
 
-const packages = [
+const packages_list = [
   {
     label: 'base',
     packages: ['@massimo-cassandro/dev-utilities', '@massimo-cassandro/linters-config'],
@@ -14,20 +14,17 @@ const packages = [
     hint: 'dev-utilities + linters-config'
   },
   {
-    label: 'rollup',
+    label: 'rollup base',
     packages: [
       'rollup@latest',
       '@rollup/plugin-terser',
       '@rollup/plugin-node-resolve',
       '@rollup/plugin-json',
+      '@rollup/plugin-image',
+      '@rollup/plugin-replace',
+      '@rollup/plugin-commonjs',
     ],
     dev: false
-  },
-  {
-    label: 'rollup commonjs',
-    packages: ['rollup/plugin-commonjs'],
-    dev: false,
-    hint: null
   },
   {
     label: 'rollup-plugin-string-html',
@@ -67,7 +64,6 @@ const packages = [
     dev: false,
     hint: null
   },
-  // 'npm i --save-dev postcss @fullhuman/postcss-purgecss autoprefixer postcss-csso sass gulp gulp-using gulp-postcss gulp-sass gulp-sourcemaps',
 
   {
     label: 'bootstrap',
@@ -79,21 +75,21 @@ const packages = [
     label: 'gulp per icone',
     packages: [
       'gulp@latest',
+      'gulp-concat',
       'gulp-dom',
+      'gulp-flatmap',
+      'gulp-inject-string',
+      'gulp-jsbeautifier',
       'gulp-rename',
       'gulp-replace',
       'gulp-svgmin',
       'gulp-svgstore',
-      'gulp-jsbeautifier',
-      'gulp-concat',
-      'gulp-flatmap',
-      'gulp-inject-string'
     ],
     dev: true,
     hint: null
   },
   {
-    label: 'gulp aggiunta per icone react',
+    label: 'gulp (aggiunta per icone react)',
     packages: ['gulp-wrap'],
     dev: true,
     hint: 'gulp-wrap'
@@ -113,15 +109,16 @@ const packages = [
   {
     label: 'react',
     packages: [
-      'react',
-      'react-dom',
-      'classnames',
-      'prop-types',
-      'dotenv-webpack',
-      'eslint-config-react-app',
       '@babel/preset-react',
       'babel-plugin-transform-react-remove-prop-types',
-      'nanoid'
+      'classnames',
+      'dotenv-webpack',
+      'eslint-config-react-app',
+      'nanoid',
+      'prop-types',
+      'react-dom',
+      'react',
+      'typescript-plugin-css-modules',
     ],
     dev: false,
   },
@@ -163,13 +160,14 @@ const packages = [
       'sass-loader',
       'style-loader',
       'terser-webpack-plugin',
+      'ts-loader',
       'webpack-cli',
       'webpack-dev-server',
       'webpack-manifest-plugin',
       'webpack-remove-empty-scripts',
       'webpack'
     ],
-    dev: false,
+    dev: true,
     merge: ['postcss', 'sass']
   },
 
@@ -194,4 +192,4 @@ const packages = [
 
 }));
 
-export {packages};
+export {packages_list};

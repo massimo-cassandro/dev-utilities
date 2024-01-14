@@ -79,14 +79,7 @@ dirs.forEach(dir => {
             sourcemap: true,
             name: name,
             banner: `/*! xxxx v.${p.version} - Massimo Cassandro ${anno} */`,
-            footer: `//! Released on ${new Date().toLocaleString('it-IT', {
-              year: 'numeric',
-              month: 'short',
-              day: '2-digit', // 'numeric
-              hour12: false,
-              hour:'2-digit',
-              minute:'2-digit'
-            })}`
+            // footer: `//! Released on ${new Date().toLocaleString('it-IT', { year: 'numeric',  month: 'short', day: '2-digit', hour12: false, hour:'2-digit', minute:'2-digit' })}`
           }]
         }
       );
@@ -98,24 +91,25 @@ export default config;
 
 
 // versione statica
-/*
 
-export default [
-  {
-    input: 'input.js',
-    plugins: [
-      node_resolve(),
-      // commonjs(),
-      terser({ compress: { passes: 2 } }),
-    ],
-    output: [
-      {
-        file: 'output.min.js',
-        format: 'iife',
-        sourcemap: true
-      }
-    ]
-  },
-  ...
-];
-*/
+// export default [
+//   {
+//     input: 'input.js',
+//     plugins: [
+//       node_resolve(),
+//       // commonjs(),
+//       terser({ compress: { passes: 2 } }),
+//     ],
+//     output: [
+//       {
+//         file: 'output.min.js',
+//         format: 'iife',
+//         sourcemap: true,
+
+//         banner: `/*! xxxx v.${p.version} - Massimo Cassandro ${anno} */`,
+//         // footer: `//! Released on ${new Date().toLocaleString('it-IT', { year: 'numeric',  month: 'short', day: '2-digit', hour12: false, hour:'2-digit', minute:'2-digit' })}`
+//       }
+//     ]
+//   },
+//   ...
+// ];

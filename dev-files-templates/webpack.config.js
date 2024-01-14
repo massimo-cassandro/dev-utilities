@@ -8,7 +8,6 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const {BannerPlugin} = require('webpack');
 const PACKAGE = require('./package.json');
@@ -17,33 +16,31 @@ const path = require('path');
 
 
 // const Dotenv = require('dotenv-webpack');
-const isDevelopment = false, // process.env.NODE_ENV === 'development';
-  buildSourcemaps = true, //isDevelopment;
-
-  buildPath = path.resolve(__dirname, '../xxx/build'),
-  publicPath = '/build';
+const isDevelopment = process.env.NODE_ENV === 'development',
+  buildSourcemaps = isDevelopment;
 
 const config = {
   mode: isDevelopment? 'development' : 'production',
 
-  watch: true,
+  watch: isDevelopment,
 
   // Control how source maps are generated
   // devtool: isDevelopment? 'inline-source-map' : 'source-map', // false, <== false non aggiunge la sourcemap ,
-  devtool: 'source-map',
+  devtool: isDevelopment? 'inline-source-map' : false,
+  // devtool: 'source-map',
 
   // Where webpack looks to start building the bundle
   entry: {
-    __entry_name__: './path/to/entry.js',
+    'my-app-name': './src/index.tsx',
   },
   // Where webpack outputs the assets and bundles
 
   output: {
-    clean: true,
-    path: buildPath,
+    path: path.resolve(__dirname, './build'),
     // filename: '[name].js',
     filename: '[name].[contenthash].js',
-    publicPath: publicPath,
+    publicPath: 'auto',
+    clean: !isDevelopment,
   },
 
 
@@ -76,24 +73,19 @@ const config = {
   },
 
   // Spin up a server for quick development
-  // devServer: {
-  //   historyApiFallback: {
-  //     index: '/',
-  //     // rewrites: [
-  //     //   { from: /^\/dashboard-carousel-json$/, to: '/dashboard-carousel-json.json' }
-  //     // ],
-  //   },
-  //   static: {
-  //     directory: paths.dev,
-  //     serveIndex: true
-  //   },
-  //   open: true,
-  //   compress: true,
-  //   hot: true,
-  //   // host: '0.0.0.0',
-  //   port: 5507
-  // },
-  // Customize the webpack build process
+  devServer: {
+    historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, '/'),
+      serveIndex: true,
+    },
+
+    open: true,
+    compress: true,
+    hot: true,
+    // host: '0.0.0.0',
+    port: 5507,
+  },
 
   plugins: [
 
@@ -104,62 +96,62 @@ const config = {
     // }),
 
     // Removes/cleans build folders and unused assets when rebuilding
-    // new CleanWebpackPlugin(), // <- sostituito da `output.clean: true`
+    // new CleanWebpackPlugin(),
 
     // Extracts CSS into separate files
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      // chunkFilename: '[id].css',
-      chunkFilename: '[name].[id].[contenthash].css',
+      filename: isDevelopment? '[name].css' : '[name].[contenthash].css',
+      chunkFilename: isDevelopment? '[id].css' : '[id].[contenthash].css'
     }),
 
     // Copies files from target to destination folder
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'assets/imgs/*.svg',
-          to: path.resolve(__dirname, buildPath + '/imgs') + '/[name][ext]',
+          from: 'public/**/*.{ico,png,svg,webmanifest}',
+          to: '[name][ext]',
           globOptions: {
-            ignore: ['*.DS_Store'],
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html', '**/.DS_Store'],
           },
-          noErrorOnMissing: true,
         },
       ],
     }),
 
-    // // local API URL
-    // new webpack.DefinePlugin({ 'API_URL': JSON.stringify('http://ada.local:8888') }),
-
     // Only update what has changed on hot reload
     new webpack.HotModuleReplacementPlugin(),
 
+    // https://github.com/jantimon/html-webpack-plugin#readme
     new HtmlWebpackPlugin({
-      filename: '../../../templates/convention23/[name]-head.html.twig',
-      inject: false,
-      templateContent: ({htmlWebpackPlugin}) => {
-        let tpl = '';
+      filename: 'index.html',
+      template: path.resolve(__dirname, './public/index.html'),
+      inject: 'body',
+      title: 'My App',
+      // templateContent: ({htmlWebpackPlugin}) => {
+      //   let tpl = '';
 
-        const js_files = typeof htmlWebpackPlugin.files.js === 'object'?
-          htmlWebpackPlugin.files.js : [htmlWebpackPlugin.files.js];
-        const css_files = typeof htmlWebpackPlugin.files.css === 'object'?
-          htmlWebpackPlugin.files.css : [htmlWebpackPlugin.files.css];
+      //   const js_files = typeof htmlWebpackPlugin.files.js === 'object'?
+      //     htmlWebpackPlugin.files.js : [htmlWebpackPlugin.files.js];
+      //   const css_files = typeof htmlWebpackPlugin.files.css === 'object'?
+      //     htmlWebpackPlugin.files.css : [htmlWebpackPlugin.files.css];
 
-        if(css_files.length) {
-          tpl += css_files.map(item =>
-            `<link rel="preload" href="${item}" as="style">`+
-            `<link rel="stylesheet" href="${item}" type="text/css" media="all">`
-          ).join('');
-        }
+      //   if(css_files.length) {
+      //     tpl += css_files.map(item =>
+      //       `<link rel="preload" href="${item}" as="style">`+
+      //       `<link rel="stylesheet" href="${item}" type="text/css" media="all">`
+      //     ).join('');
+      //   }
 
-        if(js_files.length) {
-          tpl += js_files.map(item =>
-            `<link rel="preload" href="${item}" as="script">` +
-            `<script src="${item}" defer fetchpriority="high"></script>`
-          ).join('');
-        }
+      //   if(js_files.length) {
+      //     tpl += js_files.map(item =>
+      //       `<link rel="preload" href="${item}" as="script">` +
+      //       `<script src="${item}" defer fetchpriority="high"></script>`
+      //     ).join('');
+      //   }
 
-        return tpl;
-      },
+      //   return tpl;
+      // },
     }),
 
     new WebpackManifestPlugin(),
@@ -172,7 +164,7 @@ const config = {
         //   PACKAGE.version.replace(/(\d+\.\d+)\.\d+/, '$1.x');
 
         return '/*!\n' +
-          ` * Convention Bluvacanze '23 v.${PACKAGE.version} - Massimo Cassandro / Gianluca Canale ${date}\n` +
+          ` * My App v.${PACKAGE.version} - Massimo Cassandro ${date}\n` +
           ' */\n';
       },
       raw: true
@@ -182,18 +174,39 @@ const config = {
   // Determine how modules within the project are treated
   module: {
     rules: [
+      // {
+      //   test: /\.html$/,
+      //   loader: 'html-loader'
+      // },
+
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
 
       // JavaScript/JSX: Use Babel to transpile JavaScript files
-      // {
-      //   test: /\.jsx?$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //   },
-      // },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: 'defaults' }]
+            ]
+          },
+        },
+      },
+      // inline svg
+      {
+        test: /\.inline\.svg$/i,
+        type: 'asset/inline'
+      },
+
       // Images: Copy image files to build folder
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|webp|avif)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg|webp|avif|svg)$/i,
         // type: 'asset/resource',
         type: 'javascript/auto',
         use: [
@@ -203,7 +216,6 @@ const config = {
               name: '[name].[contenthash].[ext]',
               outputPath: 'imgs/',
               esModule: false,
-
             }
           }
         ]
@@ -211,16 +223,17 @@ const config = {
 
       // Fonts and SVGs
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff2?|eot|ttf|otf)$/,
         //type: 'asset/resource',
         type: 'javascript/auto',
         use: [
           {
             loader: 'file-loader',
             options: {
+              hmr: isDevelopment,
               name: '[name].[contenthash].[ext]',
               outputPath: '/fonts',
-              // publicPath: '...'
+              // publicPath: 'convention23/build/fonts',
               esModule: false,
             }
           }
@@ -228,30 +241,30 @@ const config = {
       },
 
       // scss modules
-      // {
-      //   test: /\.module\.s(a|c)ss$/,
-      //   use: [
-      //     isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-      //     {
-      //       loader: 'css-loader',
-      //       options: {
-      //         // modules: true,
-      //         modules: {
-      //           auto: true, // /\.module\.scss$/i.test(filename),
-      //           // localIdentName: Encore.isProduction()? '[hash:base64]' : '[local]_[hash:base64:6]' // '[name]__[local]_[hash:base64:5]'
-      //           localIdentName: '[local]_[hash:base64:6]' // '[name]__[local]_[hash:base64:5]'
-      //         },
-      //         sourceMap: isDevelopment
-      //       }
-      //     },
-      //     {
-      //       loader: 'sass-loader',
-      //       options: {
-      //         sourceMap: isDevelopment
-      //       }
-      //     }
-      //   ]
-      // },
+      {
+        test: /\.module\.s(a|c)ss$/,
+        use: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              // modules: true,
+              modules: {
+                auto: true, // /\.module\.scss$/i.test(filename),
+                // localIdentName: Encore.isProduction()? '[hash:base64]' : '[local]_[hash:base64:6]' // '[name]__[local]_[hash:base64:5]'
+                localIdentName: '[local]_[hash:base64:6]' // '[name]__[local]_[hash:base64:5]'
+              },
+              sourceMap: isDevelopment
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
+      },
       {
         test: /\.(sass|scss|css)$/,
         exclude: /\.module.(s?(a|c)ss)$/,
@@ -290,10 +303,10 @@ const config = {
       'util': false
     },
     modules: ['./', 'node_modules'],
-    extensions: ['.js', '.jsx', '.json', 'scss'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.scss'],
     alias: {
       '@': './',
-      assets: buildPath,
+      assets:'./build',
     },
   }
 

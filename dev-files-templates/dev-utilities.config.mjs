@@ -13,6 +13,7 @@ const config = {
 
   /*
     Configurazione per `vscode-css-properties-list`
+    (deprecato)
   */
   // cssPropsList: {
 

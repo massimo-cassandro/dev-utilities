@@ -13,7 +13,8 @@ import chalk from 'chalk';
 // import { URL } from 'url';
 
 import { runCopyFiles } from './src/copyfiles.mjs';
-import { createPackageJson } from './src/create-package-json.mjs';
+import { createPackageJson } from './src/create-package-json-inst.mjs';
+import { packagesInst } from './src/packages-inst.mjs';
 
 
 async function main() {
@@ -29,20 +30,16 @@ async function main() {
 
   if(runInst) {
 
-    const packageJson = await confirm({ message: 'Creo package.json?' });
-
-    if(packageJson) {
-      await createPackageJson(targetDir);
-    }
-
+    await createPackageJson(targetDir);
     await runCopyFiles(targetDir);
+    await packagesInst();
 
     console.log('\n\n' + chalk.green.inverse(' FINE '));
 
   } else {
 
-    throw 'Installazione annullata';
+    console.log(chalk.red('Installazione annullata'));
   }
 }
 
-main().catch(chalk.red(console.error));
+main();

@@ -3,7 +3,6 @@
 
 const gulp = require('gulp')
   //,del = require('del')
-  ,beautify = require('gulp-jsbeautifier')
   ,replace = require('gulp-replace')
   ,rename = require('gulp-rename')
   // ,chmod = require('gulp-chmod')
@@ -20,26 +19,34 @@ const gulp = require('gulp')
 ;
 
 
-let icons_list = []; // lista delle icone, utilizzate per il file demo
+let icon_list = []; // lista delle icone, utilizzate per il file demo
 
 const svg_files_folder = 'svg-files',
   svg_files_prefix = '',
-  dest_folder = '../../AppBundle/Resources/public/imgs/',
+  dest_folder = '../../ada-sf/public/imgs/',
+  dest_folder2 = '../imgs/',
   components_source_folder = './svg-files-dashboard',
-  components_extra_icons = [ // eventuali icone dell'altro set da elaborare anche come componenti
+  components_extra_icons = [ // eventuali icone del set standard da elaborare anche come componenti
     `${svg_files_folder}/ui-info.svg`,
-    `${svg_files_folder}/ui-errore.svg`,
+    `${svg_files_folder}/ui-danger.svg`,
     `${svg_files_folder}/ui-success.svg`,
+    `${svg_files_folder}/ui-warning.svg`,
   ],
-  components_dest_folder = '../../react-src/icon-components',
+  components_dest_folder = '../apps-react/icon-components',
   components_dest_src_folder = 'src', // all'interno di components_dest_folder
   components_remove_strings = ['ui-'],
   components_file = 'icons.jsx', // all'interno di components_dest_folder
   output_file = 'icone-ada.svg',
-  icons_list_file = 'icon-list.mjs',
+  icon_list_file = 'icon-list.mjs',
   tpl_demo_file = './tpl/demo-icone-tpl.html',
-  svg_to_scss = ['freccia', 'ui-errore', 'ui-info', 'ui-success', 'ui-avviso', 'ada-icona'], // icone da convertire in variabili scss
+  svg_to_scss = ['freccia', 'ui-danger', 'ui-info', 'ui-success', 'ui-warning', 'ada-icona'], // icone da convertire in variabili scss
   icons_scss_file = '_icone-svg.scss',
+
+  opacity_classes = {
+    2: 'duotone-light',
+    4: 'duotone-medium',
+    6: 'duotone-dark',
+  },
 
   // https://github.com/svg/svgo/tree/master/plugins
   // https://github.com/svg/svgo#built-in-plugins
@@ -56,7 +63,7 @@ const svg_files_folder = 'svg-files',
     , 'removeEmptyContainers'
     // , { name: 'removeAttrs', params: { attrs: ['(fill|stroke|class|style|data.*)', 'svg:(width|height)'] } }
     // , { name: 'removeAttrs', params: { attrs: ['(filter|fill|stroke|class|style|data.*)', 'svg:(width|height)'] } }
-    , { name: 'removeAttrs', params: { attrs: ['(filter|fill|stroke|fill-rule|stroke-linecap|stroke-linejoin|stroke-width|transform|style|class|data.*)', 'svg:(width|height)'] } }
+    , { name: 'removeAttrs', params: { attrs: ['(filter|fill|stroke|fill-rule|clip-rule|stroke-linecap|stroke-linejoin|stroke-width|transform|style|class|data.*)', 'svg:(width|height)'] } }
     , 'removeUselessDefs'
     //, { name: 'addAttributesToSVGElement0, params: {attribute: "#{$attr}"}}
     // , { name: 'addClassesToSVGElement', params: { className: 'line-icon'  } }
@@ -78,13 +85,14 @@ gulp.task('icone', function() {
       //   path.basename = path.basename.replace(/-line$/, '');
       //   line_icons.push(path.basename);
       // }
-      icons_list.push(path.basename);
+      icon_list.push(path.basename);
 
       return path;
     }))
     // .pipe(grst({
     //   tagNames: ['filter']
     // }))
+    .pipe( replace(/<rect width="96" height="\d+"( fill=".*")?\/?>(<\/rect>)?/i, '') )
     .pipe(svgmin({
       multipass: true,
       full: true,
@@ -98,8 +106,21 @@ gulp.task('icone', function() {
     .pipe(svgstore())
     // .pipe( replace(/id="(.*?)-line"/g, 'id="$1" class="line-icon"') )
     // .pipe( replace(/<title>(.*?)<\/title>/g, '') )
+
+    // duotone icons
+    .pipe(replace(/(?:fill-)?opacity=(?:'|")0?\.(\d+)(?:'|")/g, (match, p1) => {
+      const opacity_value = Math.round(+((p1 + '000').slice(0, 3)) / 100);
+
+      var opacity_key = Object.keys(opacity_classes).reduce(function(prev, curr) {
+        curr = +curr;
+        return (Math.abs(curr - opacity_value) < Math.abs(prev - opacity_value) ? curr : prev);
+      });
+      return `class='${opacity_classes[opacity_key]}'`;
+    }))
+
     .pipe( rename(output_file) )
     // .pipe(chmod(0o755))
+    .pipe(gulp.dest(dest_folder2))
     .pipe(gulp.dest(dest_folder));
 
   // copia nella dir di sviluppo per facilitare il debug
@@ -108,16 +129,14 @@ gulp.task('icone', function() {
 });
 
 
-gulp.task('icons_list', function(cb) {
+gulp.task('icon_list', function(cb) {
   var str = '// lista id icone per demo e altro\n' +
-    '// NB: questo file è generato dinamicamente, eventuali modifiche saranno sovrascritte.\n\n' +
-    '// NB: questo file non è utilizzato nella demo, viene generato solo a scopo di controllo\n' +
-    '//     o per eventuali altri utilizzi nel progetto.\n\n' +
-    'export const icons_list = ' + JSON.stringify(icons_list.sort(), null, '  ').replace(/"/g, '\'') + ';';
+    '// NB: questo file è generato dinamicamente, eventuali modifiche saranno sovrascritte\n\n' +
+    'export const icon_list = ' + JSON.stringify(icon_list.sort(), null, '  ').replace(/"/g, '\'') + ';';
 
-  //str +=  '\n\nexport default icons_list;';
+  //str +=  '\n\nexport default icon_list;';
 
-  return fs.writeFile(icons_list_file, str, cb);
+  return fs.writeFile(icon_list_file, str, cb);
 });
 
 // creazione file html standalone per la consultazione
@@ -126,29 +145,14 @@ gulp.task('icons_list', function(cb) {
 gulp.task('demo_file', function() {
   const icone = fs.readFileSync(dest_folder + output_file, 'utf8');
   return gulp.src(tpl_demo_file)
-    .pipe(inject.prepend(
-      '<!--\n' +
-      '  NB: questo file è stato generato dinamicamente, eventuali modifiche saranno sovrascritte \n' +
-      `  Se necessario, modificare il file template (${tpl_demo_file})\n`+
-      '-->\n'
-    ))
     .pipe(dom(function(){
       const wrapper = this.querySelector('.icon-wrapper');
       wrapper.insertAdjacentHTML('afterend',
-        `<script>const icons_list = ${JSON.stringify(icons_list.sort(), null, '  ').replace(/"/g, '\'')};</script>`
+        `<script>const icon_list = ${JSON.stringify(icon_list.sort(), null, '  ').replace(/"/g, '\'')};</script>`
       );
       return this.body.insertAdjacentHTML('beforeend',
-        `<div hidden>${icone}</div>`
+        icone
       );
-    }))
-    .pipe(beautify({
-      indent_size: 2,
-      html: {
-        'indent_char': ' ',
-        'indent_size': 2,
-        'inline': [],
-        'wrap_line_length': 0
-      }
     }))
     .pipe( rename('demo-icone.html') )
     .pipe(gulp.dest('./'));
@@ -199,7 +203,7 @@ export default function (props) {
     </BaseIcon>
   );
 }`;
-gulp.task('icons_components', function () {
+gulp.task('icon_components', function () {
   return gulp.src([
     components_source_folder + '/*.svg'
   ].concat(components_extra_icons))
@@ -232,6 +236,18 @@ gulp.task('icons_components', function () {
       path.basename = 'icon-' + path.basename;
       path.extname = '.jsx';
     }))
+
+    // duotone icons
+    .pipe(replace(/(?:fill-)?opacity=(?:'|")0?\.(\d+)(?:'|")/g, (match, p1) => {
+      const opacity_value = Math.round(+((p1 + '000').slice(0, 3)) / 100);
+
+      var opacity_key = Object.keys(opacity_classes).reduce(function(prev, curr) {
+        curr = +curr;
+        return (Math.abs(curr - opacity_value) < Math.abs(prev - opacity_value) ? curr : prev);
+      });
+      return `className='${opacity_classes[opacity_key]}'`;
+    }))
+
     .pipe(replace(/viewBox=('|")((\d+ ?){4})('|")/, (match, p1, p2) => {
       viewbox = null;
       if(aspect_ratio && p2) {
@@ -276,10 +292,10 @@ gulp.task('default',
     // 'icone',
     gulp.parallel(
       'icone',
-      'icons_components'
+      'icon_components'
     ),
     gulp.parallel(
-      'icons_list',
+      'icon_list',
       'icons_component_main',
       'svg2scss',
       'demo_file'

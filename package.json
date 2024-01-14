@@ -1,6 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-  "version": "1.20.2",
+  "version": "1.21.0",
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./src/update-version/index.mjs",
@@ -67,7 +67,7 @@
     "to-ico": "^1.1.5"
   },
   "devDependencies": {
-    "@massimo-cassandro/linters-config": "^1.5.8",
+    "@massimo-cassandro/linters-config": "^1.6.0",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",

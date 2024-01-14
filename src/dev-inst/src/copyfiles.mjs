@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
-import * as fs from 'fs';
+import { copyFileSync }from 'fs';
+import { copyFile as copyFilePromise, constants as copyFileConstant } from 'node:fs/promises';
 import * as path from 'path';
 import confirm from '@inquirer/confirm';
 import checkbox/* , { Separator }  */from '@inquirer/checkbox';
@@ -10,54 +11,52 @@ import { URL } from 'url';
 import { files } from './copyfiles-list.mjs';
 
 
-function copyfiles(filesToCopy, targetDir) {
+async function executeCopy(source, targetDir, targetFile) {
+
+  const targetPath = targetDir + targetFile;
+
+  try {
+    await copyFilePromise(source, targetPath, copyFileConstant.COPYFILE_EXCL);
+  } catch {
+    const overwrite = await confirm({ message: `Il file '${targetFile}' esiste, sovascrivo?`, default: false});
+
+    if(overwrite) {
+      copyFileSync(source, targetPath);
+      console.log(chalk.cyan(`File '${targetFile}' copiato`));
+
+    } else {
+      console.log(chalk.yellow(`Il file '${targetFile}' è stato saltato`));
+    }
+  }
+}
+
+async function copyfiles(filesToCopy, targetDir) {
 
   const __dirname = new URL('.', import.meta.url).pathname;
 
-  const templatesDir = path.resolve( __dirname, '../../../dev-files-templates');
+  const sourceDir = path.resolve( __dirname, '../../../dev-files-templates');
   targetDir += /\/$/.test(targetDir)? '' : '/';
 
-  filesToCopy.forEach(filesToCopyItem => {
+  for (const filesToCopyItem of filesToCopy) {
 
-    files[filesToCopyItem].forEach(item => {
+    for (const item of files[filesToCopyItem]) {
 
-      console.log(chalk.dim(`Copia del file '${item[1]}'...`));
+      await executeCopy(path.join( sourceDir, item.source), targetDir, item.target);
+      console.log();
 
-      const source = path.join( templatesDir, item[0]),
-        target = targetDir + item[1];
+    } // end for
+  } // end for
 
-      // console.log(templatesDir, item[0], source);
-      // console.log(targetDir, item[1], target);
 
-      fs.copyFile(source, target, fs.constants.COPYFILE_EXCL, async (err) => {
-        console.log();
-        if(err?.code === 'EEXIST') {
-          console.log('\n' + chalk.red(`il file '${err.dest}' esiste`) + '\n');
-          const overwrite = await confirm({ message: `Il file '${err.dest}' esiste, sovascrivo?`});
-
-          if(overwrite) {
-            fs.copyFileSync(source, target);
-            console.log(chalk.green(`File '${item[1]}'copiato`));
-
-          } else {
-            console.log(chalk.yellow(`Il file '${err.dest}' è stato saltato`));
-          }
-
-        } // else {
-        //   console.log(chalk.green(`File '${item[1]}'copiato`));
-        // }
-      });
-    });
-
-  });
-}
+} // end copyfiles
 
 
 export async function runCopyFiles(targetDir) {
 
   const copyFilesList = await checkbox({
-    message: 'Scegli cosa copiare: (spazio per selezionare)',
+    message: 'Scegli quali file aggiungere al progetto:',
     loop: false,
+    pageSize: 20,
     choices: Object.keys(files).map((item) => {
       return { value: item, name: `Aggiungi '${item}'` };
     }),
@@ -68,8 +67,8 @@ export async function runCopyFiles(targetDir) {
   if(copyFilesList.length ) {
 
     console.log('\n' + chalk.yellow.inverse(' Copia files in corso... ') + '\n');
-    copyfiles(copyFilesList, targetDir);
-    console.log('\n' + chalk.yellow.inverse(' Copia files completata ') + '\n');
+    await copyfiles(copyFilesList, targetDir);
+    console.log('\n' + chalk.green.inverse(' Copia files completata ') + '\n');
 
   } else {
     console.log('\n' + chalk.yellow.inverse(' Installazione cancellata ' + '\n'));

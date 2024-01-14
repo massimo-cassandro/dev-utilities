@@ -1,6 +1,8 @@
 
 # custom properties list per VSCode
 
+> Deprecato in favore di <https://marketplace.visualstudio.com/items?itemName=phoenisx.cssvar>
+
 Estrae dalla lista di file `.css` indicati l'elenco delle *custom properties* e genera uno *snippet vscode*.
 
 Per altre info vedi [A Custom Properties Snippet Builder for VS Code](https://medium.com/me/stats/post/e6f415f2ccd7).

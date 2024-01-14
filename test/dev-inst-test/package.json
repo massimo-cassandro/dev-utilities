@@ -1,19 +1,17 @@
 {
-  "name": "xxx",
+  "name": "@massimo-cassandro/xxx",
   "description": "",
   "version": "0.1.0",
   "author": "Massimo Cassandro",
-  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js",
-  "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xxx.git#main"
+    "url": "git+https://github.com/massimo-cassandro/xxx.git#main"
   },
-  "bugs": {
-    "url": "https://github.com/xxx/issues"
-  },
-  "homepage": "https://github.com/xxx#readme",
   "keywords": [],
   "scripts": {},
   "_scripts": {
@@ -52,20 +50,13 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
       "./node_modules/@massimo-cassandro/linters-config/eslintrc.js"
     ],
     "ignorePatterns": []
   },
   "babel": {
     "presets": [
-      "@babel/preset-env",
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "automatic"
-        }
-      ]
+      "@babel/preset-env"
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties"
