@@ -42,6 +42,7 @@
     ExpiresByType text/x-javascript "access 1 year"
     ExpiresByType application/javascript "access 1 year"
     ExpiresByType application/x-javascript "access 1 year"
+    ExpiresByType application/json "access 1 day"
 
     ExpiresByType image/svg+xml "access 1 year"
     ExpiresByType image/gif "access 1 year"

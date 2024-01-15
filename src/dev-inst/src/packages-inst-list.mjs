@@ -110,6 +110,8 @@ const packages_list = [
     label: 'react',
     packages: [
       '@babel/preset-react',
+      '@types/react',
+      '@types/react-dom',
       'babel-plugin-transform-react-remove-prop-types',
       'classnames',
       'dotenv-webpack',
