@@ -41,6 +41,12 @@ const config = {
       (default null)
     */
     htmlFiles: ['path/to/html_file1.html', 'path/to/html_file2', ...],
+    
+    /*
+      array di percorsi di file json da aggiornare con un ogetto di questo tipo:
+      `{"d": "<dataiso>", "v": "<versione>"}`
+    */
+    jsonFiles: ['path/to/file1.json', 'path/to/file2.json', ...],
 
     /*
       testo descrittivo di default mostrato tra le opzioni di aggiornamento
@@ -67,11 +73,12 @@ const config = {
 Tutti parametri sono opzionali
 
 ### Parametri CLI
-Opzionalmente, e per compatibilità con le versioni precedenti, alcuni parametri possono essere definiti direttamente via CLI:
+Opzionalmente, alcuni parametri possono essere definiti direttamente via CLI:
 
 ```bash
 npx update-version \ 
   --html-files=path/to/html_file1.html,path/to/html_file2.html,... \
+  --json-files=path/to/file1.json,path/to/file2.json,... \
   --twig-vars-file=path/to/file/config.html.twig \
   --default-descr=text \
   --skip-descr-prompt \

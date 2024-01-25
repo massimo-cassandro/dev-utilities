@@ -12,6 +12,7 @@ export const params = {
   cfgDefaults: {
     twigVarsFile     : null,
     htmlFiles        : null,
+    jsonFiles        : null,
     skipDescrPrompt  : false,
     patchOnly        : false,
     defaultDescr     : null

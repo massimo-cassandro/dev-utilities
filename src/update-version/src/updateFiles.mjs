@@ -34,6 +34,14 @@ export function updateFiles() {
     });
   }
 
+  // file json
+  if(params.cfg.jsonFiles) {
+    params.cfg.jsonFiles.forEach(file => {
+      fs.params.log_item.date(file, JSON.stringify({d: params.log_item.date, v: params.newVersion}));
+      log(chalk.dim(`\nAggiornamento file JSON: ${file}`));
+    });
+  }
+
   // console
   const outputString = `│  👍 Versione aggiornata: ${params.oldVersion} → ${params.newVersion}  │`,
     frameLine = '─'.repeat(outputString.length - 2);

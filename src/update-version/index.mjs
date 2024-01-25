@@ -112,8 +112,7 @@ try {
 
     } else {
 
-      // TODO deprecati, mantenuti per compatiubilità con le versioni precedenti
-      // questa parte sarà rimossa nelle prossime versioni
+      // parametri CLI
 
       let parsedCfg = {};
       process.argv.forEach(param => {
@@ -125,6 +124,11 @@ try {
         if(/^--html-files/.test(param)) {
           [, parsedCfg.htmlFiles] = param.split('=');
           parsedCfg.htmlFiles = parsedCfg.htmlFiles.split(',');
+        }
+
+        if(/^--json-files/.test(param)) {
+          [, parsedCfg.jsonFiles] = param.split('=');
+          parsedCfg.jsonFiles = parsedCfg.jsonFiles.split(',');
         }
 
         if(/^--default-descr=(.*?)$/.test(param)) {
