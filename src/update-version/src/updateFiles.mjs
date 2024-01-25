@@ -37,7 +37,7 @@ export function updateFiles() {
   // file json
   if(params.cfg.jsonFiles) {
     params.cfg.jsonFiles.forEach(file => {
-      fs.params.log_item.date(file, JSON.stringify({d: params.log_item.date, v: params.newVersion}));
+      fs.writeFileSync(file, JSON.stringify({d: params.log_item.date, v: params.log_item.vers}));
       log(chalk.dim(`\nAggiornamento file JSON: ${file}`));
     });
   }
