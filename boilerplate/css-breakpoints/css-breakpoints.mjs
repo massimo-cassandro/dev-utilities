@@ -2,7 +2,7 @@
 // che per l'utilizzo negli script js
 // i valori corrispondono a quelli di BS5
 
-const gridBreakpoints = {
+export const gridBreakpoints = {
   xs  : 0,
   sm  : 576,
   md  : 768,
@@ -12,7 +12,13 @@ const gridBreakpoints = {
 };
 
 // breakpoint nel quale si passa da mobile a desktop
-const desktopBreakpoint = 'md',
-  desktopBreakpointPx = gridBreakpoints[desktopBreakpoint];
+const brkp = {
+  desktopBreakpoint: 'md'
+};
 
-export { gridBreakpoints, desktopBreakpoint, desktopBreakpointPx};
+brkp.desktopBreakpointPx = gridBreakpoints[brkp.desktopBreakpoint];
+brkp.desktopBreakpointsPxBefore = brkp.desktopBreakpointPx - 1;
+brkp.desktopBreakpointRem = (brkp.desktopBreakpointPx/16).toFixed(4) + 'rem';
+brkp.desktopBreakpointBeforeRem = (brkp.desktopBreakpointsPxBefore/16).toFixed(4) + 'rem';
+
+export { brkp };
