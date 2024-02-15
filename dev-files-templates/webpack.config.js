@@ -120,7 +120,7 @@ const config = {
     }),
 
     // Only update what has changed on hot reload
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(), (non necessario con devServer.hot === true)
 
     // https://github.com/jantimon/html-webpack-plugin#readme
     new HtmlWebpackPlugin({

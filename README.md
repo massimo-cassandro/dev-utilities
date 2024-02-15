@@ -7,7 +7,7 @@ Utilità per lo sviluppo
 * [Update packages](docs/update-packages.md)
 * [Custom properties list for VSCode](docs/custom-properties-list.md)
 * [Create Favicons](docs/create-favicons.md)
-* [Dev installer](docs/dev-inst.md)
+* [install list](docs/inst-list.md)
 * [Esempi di utilizzo](docs/esempi-utilizzo.md)
 
 ## Layout-tools
