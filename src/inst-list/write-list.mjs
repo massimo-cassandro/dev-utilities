@@ -10,7 +10,7 @@ import * as path from 'path';
 const __dirname = new URL('.', import.meta.url).pathname;
 
 
-const target_file = path.resolve(__dirname, '../../dev-files-templates/npm-inst-list.md');
+const target_file = path.resolve(__dirname, '../../boilerplate/npm-inst-list.md');
 
 const content = packages_list.map(p => {
 
