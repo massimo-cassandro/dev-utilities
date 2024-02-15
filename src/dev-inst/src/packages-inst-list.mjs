@@ -104,14 +104,17 @@ const packages_list = [
     packages: ['normalize.css'],
     dev: false,
   },
+  {
+    label: 'open-props',
+    packages: ['open-props', 'postcss-jit-props'],
+    dev: false,
+  },
   // 'npm i --save @fontsource/xxxxx'
 
   {
     label: 'react',
     packages: [
       '@babel/preset-react',
-      '@types/react',
-      '@types/react-dom',
       'babel-plugin-transform-react-remove-prop-types',
       'classnames',
       'dotenv-webpack',
@@ -120,7 +123,6 @@ const packages_list = [
       'prop-types',
       'react-dom',
       'react',
-      'typescript-plugin-css-modules',
     ],
     dev: false,
   },
@@ -162,7 +164,6 @@ const packages_list = [
       'sass-loader',
       'style-loader',
       'terser-webpack-plugin',
-      'ts-loader',
       'webpack-cli',
       'webpack-dev-server',
       'webpack-manifest-plugin',
@@ -171,6 +172,17 @@ const packages_list = [
     ],
     dev: true,
     merge: ['postcss', 'sass']
+  },
+  {
+    label: 'typescript per react/webpack',
+    packages: [
+      '@types/react-dom',
+      '@types/react',
+      'ts-loader',
+      'typescript-plugin-css-modules',
+      'typescript'
+    ],
+    dev: true,
   },
 
 ].concat([
