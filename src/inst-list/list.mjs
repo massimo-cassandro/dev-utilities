@@ -188,4 +188,16 @@ const packages_list = [
 
 }));
 
+packages_list.sort((a,b) => {
+  if (a.label < b.label) {
+    return -1;
+  }
+  if (a.label > b.label) {
+    return 1;
+  }
+
+  // names must be equal
+  return 0;
+});
+
 export {packages_list};
