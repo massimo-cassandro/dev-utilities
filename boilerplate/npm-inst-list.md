@@ -34,7 +34,7 @@ npm i -S @massimo-cassandro/sharing-links
 npm i -S @massimo-cassandro/unsplash-page
 
 ## base (dev-utilities + linters-config)
-npm i -S @massimo-cassandro/dev-utilities @massimo-cassandro/linters-config
+npm i -D @massimo-cassandro/dev-utilities @massimo-cassandro/linters-config
 
 ## bootstrap
 npm i -S bootstrap
@@ -46,7 +46,7 @@ npm i -D gulp@latest gulp-concat gulp-dom gulp-flatmap gulp-inject-string gulp-j
 npm i -D gulp-wrap
 
 ## html-react-parser
-npm i -S html-react-parser
+npm i -D html-react-parser
 
 ## normalize.css
 npm i -S normalize.css
@@ -55,34 +55,34 @@ npm i -S normalize.css
 npm i -S open-props postcss-jit-props
 
 ## postcss + csso + autoprefixer + purgecss
-npm i -S postcss @fullhuman/postcss-purgecss autoprefixer postcss-csso
+npm i -D postcss @fullhuman/postcss-purgecss autoprefixer postcss-csso
 
 ## postcss cli
 npm i -D postcss-cli
 
 ## postcss-banner
-npm i -S postcss-banner
+npm i -D postcss-banner
 
 ## primsjs
 npm i -S prismjs
 
 ## react
-npm i -S @babel/preset-react babel-plugin-transform-react-remove-prop-types classnames dotenv-webpack eslint-config-react-app nanoid prop-types react-dom react
+npm i -D @babel/preset-react babel-plugin-transform-react-remove-prop-types classnames dotenv-webpack eslint-config-react-app nanoid prop-types react-dom react
 
 ## react-html-comment
-npm i -S react-html-comment
+npm i -D react-html-comment
 
 ## rollup base
-npm i -S rollup@latest @rollup/plugin-terser @rollup/plugin-node-resolve @rollup/plugin-json @rollup/plugin-image @rollup/plugin-replace @rollup/plugin-commonjs
+npm i -D rollup@latest @rollup/plugin-terser @rollup/plugin-node-resolve @rollup/plugin-json @rollup/plugin-image @rollup/plugin-replace @rollup/plugin-commonjs
 
 ## rollup-plugin-string-html
-npm i -S rollup-plugin-string-html
+npm i -D rollup-plugin-string-html
 
 ## sass cli
-npm i -S sass
+npm i -D sass
 
 ## styled-components
-npm i -S styled-components
+npm i -D styled-components
 
 ## typescript per react/webpack
 npm i -D @types/react-dom @types/react ts-loader typescript-plugin-css-modules typescript

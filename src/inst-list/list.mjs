@@ -2,7 +2,7 @@ const packages_list = [
   {
     label: 'base (dev-utilities + linters-config)',
     packages: ['@massimo-cassandro/dev-utilities', '@massimo-cassandro/linters-config'],
-    dev: false,
+    dev: true,
   },
   {
     label: 'rollup base',
@@ -15,12 +15,12 @@ const packages_list = [
       '@rollup/plugin-replace',
       '@rollup/plugin-commonjs',
     ],
-    dev: false
+    dev: true
   },
   {
     label: 'rollup-plugin-string-html',
     packages: ['rollup-plugin-string-html'],
-    dev: false,
+    dev: true,
   },
 
   // 'npm i --save-dev rollup-plugin-minify-html-template-literals',
@@ -28,7 +28,7 @@ const packages_list = [
   {
     label: 'sass cli',
     packages: ['sass'],
-    dev: false,
+    dev: true,
   },
   {
     label: 'postcss + csso + autoprefixer + purgecss',
@@ -38,7 +38,7 @@ const packages_list = [
       'autoprefixer',
       'postcss-csso',
     ],
-    dev: false,
+    dev: true,
   },
   {
     label: 'postcss cli',
@@ -48,7 +48,7 @@ const packages_list = [
   {
     label: 'postcss-banner',
     packages: ['postcss-banner'],
-    dev: false
+    dev: true
   },
 
   {
@@ -107,22 +107,22 @@ const packages_list = [
       'react-dom',
       'react',
     ],
-    dev: false,
+    dev: true,
   },
   {
     label: 'styled-components',
     packages: ['styled-components'],
-    dev: false,
+    dev: true,
   },
   {
     label: 'react-html-comment',
     packages: ['react-html-comment'],
-    dev: false,
+    dev: true,
   },
   {
     label: 'html-react-parser',
     packages: ['html-react-parser'],
-    dev: false,
+    dev: true,
   },
   {
     label: 'webpack',
