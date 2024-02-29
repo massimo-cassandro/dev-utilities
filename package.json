@@ -1,10 +1,6 @@
 {
   "name": "@massimo-cassandro/dev-utilities",
-<<<<<<< HEAD
   "version": "1.24.1",
-=======
-  "version": "1.24.0",
->>>>>>> 7d85161526ce2c0b5e940f53d3fe7acfb5e6d92c
   "description": "My collection of dev utilities",
   "bin": {
     "update-version": "./src/update-version/index.mjs",
